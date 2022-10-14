@@ -67,9 +67,7 @@ void Sculptor::putBox(int x0, int x1, int y0, int y1, int z0, int z1) {
     for (int p = z0; p <= z1; p++) {
         for (int l = x0; l <= x1; l++) {
             for (int c = y0; c <= y1; c++) {
-                v[p][l][c].isOn = true;
-                v[p][l][c].r = r; v[p][l][c].g = g; v[p][l][c].b = b;
-                v[p][l][c].a = a;
+                putVoxel(l,c,p);
             }
         }
     }
@@ -81,9 +79,7 @@ void Sculptor::cutBox(int x0, int x1, int y0, int y1, int z0, int z1) {
     for (int p = z0; p <= z1; p++) {
         for (int l = x0; l <= x1; l++) {
             for (int c = y0; c <= y1; c++) {
-                v[p][l][c].isOn = false;
-                v[p][l][c].r = r; v[p][l][c].g = g; v[p][l][c].b = b;
-                v[p][l][c].a = a;
+                cutVoxel(l,c,p);
             }
         }
     }
@@ -94,6 +90,7 @@ void Sculptor::cutBox(int x0, int x1, int y0, int y1, int z0, int z1) {
 void Sculptor::writeOFF(const char* filename) {
 
     unsigned int voxels = 0;
+    unsigned int currface = 0;
 
     // Calculate amount of voxels with property isOn = true
 
@@ -106,7 +103,9 @@ void Sculptor::writeOFF(const char* filename) {
         }
     }
 
-    // There will be voxels * 8 vertexes and voxels * 6 faces
+    std::cout << "log: preparing " << voxels << " voxels" << std::endl;
+
+    // There will be (voxels * 8) vertexes and (voxels * 6) faces!
 
     std::ofstream fout;
 
@@ -115,8 +114,61 @@ void Sculptor::writeOFF(const char* filename) {
 
     if (fout.is_open()) {
 
+        // Header
+
+        std::cout << "log: building header" << std::endl;
+
         fout << "OFF" << std::endl;
-        fout << voxels * 6 << " " << voxels * 8 << " 0" << std::endl;
+        fout << voxels * 8 << " " << voxels * 6 << " " << 0 << std::endl;
+
+        // Vertexes coordinates based on [x y z]
+
+        std::cout << "log: building vertexes coordinates" << std::endl;
+
+        for (int p = 0; p < nz; p++) {
+            for (int l = 0; l < nx; l++) {
+                for (int c = 0; c < ny; c++) {
+                    if (v[p][l][c].isOn) {
+                        fout << -0.5 + l << " " <<  0.5 + c << " " << -0.5 + p << std::endl;
+                        fout << -0.5 + l << " " << -0.5 + c << " " << -0.5 + p << std::endl;
+                        fout <<  0.5 + l << " " << -0.5 + c << " " << -0.5 + p << std::endl;
+                        fout <<  0.5 + l << " " <<  0.5 + c << " " << -0.5 + p << std::endl;
+                        fout << -0.5 + l << " " <<  0.5 + c << " " <<  0.5 + p << std::endl;
+                        fout << -0.5 + l << " " << -0.5 + c << " " <<  0.5 + p << std::endl;
+                        fout <<  0.5 + l << " " << -0.5 + c << " " <<  0.5 + p << std::endl;
+                        fout <<  0.5 + l << " " <<  0.5 + c << " " <<  0.5 + p << std::endl;
+                    }
+                }
+            }
+        }
+
+        // Faces specifications
+
+        std::cout << "log: building faces specifications" << std::endl;
+
+        for (int p = 0; p < nz; p++) {
+            for (int l = 0; l < nx; l++) {
+                for (int c = 0; c < ny; c++) {
+
+                    if (v[p][l][c].isOn) {
+                        // specicifies face whose vertexes have indexes [ a b c d ]
+
+                        fout << 4 << " " << 0 + currface << " " << 3 + currface << " " << 2 + currface << " " << 1 + currface << " " << v[p][l][c].r << " " << v[p][l][c].g << " " << v[p][l][c].b << " " << v[p][l][c].a << std::endl;
+                        fout << 4 << " " << 4 + currface << " " << 5 + currface << " " << 6 + currface << " " << 7 + currface << " " << v[p][l][c].r << " " << v[p][l][c].g << " " << v[p][l][c].b << " " << v[p][l][c].a << std::endl;
+                        fout << 4 << " " << 0 + currface << " " << 1 + currface << " " << 5 + currface << " " << 4 + currface << " " << v[p][l][c].r << " " << v[p][l][c].g << " " << v[p][l][c].b << " " << v[p][l][c].a << std::endl;
+                        fout << 4 << " " << 0 + currface << " " << 4 + currface << " " << 7 + currface << " " << 3 + currface << " " << v[p][l][c].r << " " << v[p][l][c].g << " " << v[p][l][c].b << " " << v[p][l][c].a << std::endl;
+                        fout << 4 << " " << 3 + currface << " " << 7 + currface << " " << 6 + currface << " " << 2 + currface << " " << v[p][l][c].r << " " << v[p][l][c].g << " " << v[p][l][c].b << " " << v[p][l][c].a << std::endl;
+                        fout << 4 << " " << 1 + currface << " " << 2 + currface << " " << 6 + currface << " " << 5 + currface << " " << v[p][l][c].r << " " << v[p][l][c].g << " " << v[p][l][c].b << " " << v[p][l][c].a << std::endl;
+
+                        // and increment another indexes by 8, i.e, [ a + 8k b + 8k c + 8k d + 8k ]
+
+                        currface += 8;
+                    }
+                }
+            }
+        }
+
+        std::cout << "success: file " << filename << " exported" << std::endl;
 
         fout.close();
     }
