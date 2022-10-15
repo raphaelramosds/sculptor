@@ -85,6 +85,45 @@ void Sculptor::cutBox(int x0, int x1, int y0, int y1, int z0, int z1) {
     }
 }
 
+// putSphere: put a sphere whose center is [ xcenter ycenter zcenter ]
+
+/// Note: the octante bottom coordinate, i.e, (nx/2, ny/2, 0) is my reference!
+
+void Sculptor::putSphere(int xcenter, int ycenter, int zcenter, int radius) {
+    for (int p = 0; p < nz; p++) {
+        for (int l = 0; l < nx; l++) {
+            for (int c = 0; c < ny; c++) {
+
+                // shifts any voxel to the center
+
+                float x = l - (xcenter + nx/2);
+                float y = c - (ycenter + ny/2);
+                float z = p - zcenter;
+
+                if (x*x + y*y + z*z < radius*radius)
+                    putVoxel(l,c,p);
+            }
+        }
+    }
+}
+
+// cutSphere: remove a sphere whose center is [ xcenter ycenter zcenter ]
+
+void Sculptor::cutSphere(int xcenter, int ycenter, int zcenter, int radius) {
+    for (int p = 0; p < nz; p++) {
+        for (int l = 0; l < nx; l++) {
+            for (int c = 0; c < ny; c++) {
+                float x = l - (xcenter + nx/2);
+                float y = c - (ycenter + ny/2);
+                float z = p - zcenter;
+
+                if (x*x + y*y + z*z < radius*radius)
+                    cutVoxel(l,c,p);
+            }
+        }
+    }
+}
+
 // writeOFF: exports a OFF file according with the given drawing instructions
 
 void Sculptor::writeOFF(const char* filename) {
