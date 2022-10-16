@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <cmath>
 #include "sculptor.h"
 #include "voxel.h"
 
@@ -73,7 +74,7 @@ void Sculptor::putBox(int x0, int x1, int y0, int y1, int z0, int z1) {
     }
 }
 
-// removeBox: remove all voxels on range x0 to x1, y0 to y1 and z0 to z1
+// cutBox: remove all voxels on range x0 to x1, y0 to y1 and z0 to z1
 
 void Sculptor::cutBox(int x0, int x1, int y0, int y1, int z0, int z1) {
     for (int p = z0; p <= z1; p++) {
@@ -85,8 +86,6 @@ void Sculptor::cutBox(int x0, int x1, int y0, int y1, int z0, int z1) {
     }
 }
 
-/// Note: the middle of the octant bottom coordinate, i.e, (nx/2, ny/2, 0) is my reference!
-
 /// Note: no need to loop over all the voxes! I defined a box that contains the
 /// volume and only iterate within it
 
@@ -94,7 +93,7 @@ void Sculptor::cutBox(int x0, int x1, int y0, int y1, int z0, int z1) {
 
 void Sculptor::putSphere(int xcenter, int ycenter, int zcenter, int radius) {
 
-    float s = xcenter + nx/2, t = ycenter + ny/2;
+    float s = xcenter, t = ycenter;
 
     for (int p = zcenter - radius; p < zcenter + radius; p++) {
         for (int l = s - radius; l < s + radius; l++) {
@@ -117,7 +116,7 @@ void Sculptor::putSphere(int xcenter, int ycenter, int zcenter, int radius) {
 
 void Sculptor::cutSphere(int xcenter, int ycenter, int zcenter, int radius) {
 
-    float s = xcenter + nx/2, t = ycenter + ny/2;
+    float s = xcenter, t = ycenter;
 
     for (int p = zcenter - radius; p < zcenter + radius; p++) {
         for (int l = s - radius; l < s + radius; l++) {
@@ -138,7 +137,7 @@ void Sculptor::cutSphere(int xcenter, int ycenter, int zcenter, int radius) {
 
 void Sculptor::putEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int ry, int rz) {
 
-    float s = xcenter + nx/2, t = ycenter + ny/2;
+    float s = xcenter, t = ycenter;
 
     for (int p = zcenter - rz; p < zcenter + rz; p++) {
         for (int l = s - rx; l < s + rx; l++) {
@@ -159,7 +158,7 @@ void Sculptor::putEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int r
 
 void Sculptor::cutEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int ry, int rz) {
 
-    float s = xcenter + nx/2, t = ycenter + ny/2;
+    float s = xcenter, t = ycenter;
 
     for (int p = zcenter - rz; p < zcenter + rz; p++) {
         for (int l = s - rx; l < s + rx; l++) {
@@ -173,6 +172,33 @@ void Sculptor::cutEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int r
                     cutVoxel(l,c,p);
             }
         }
+    }
+}
+
+// putCylinder: put a cylinder shifted of [x0 y0 z0] and rotate fi degrees it across z-axis
+
+void Sculptor::putCylinder(int xcenter, int ycenter, int zcenter, int radius, int z1, float fi, char axis) {
+
+    float s = xcenter, t = ycenter;
+
+    for (int p = zcenter; p <= z1 + zcenter; p++) {
+      for (int l = s - radius; l < s + radius; l++) {
+        for (int c = t - radius; c < t + radius; c++) {
+
+            float x = l - s;
+            float y = c - t;
+
+            unsigned int rotx = fi == 0 ? l : l;
+            unsigned int roty = fi == 0 ? c : c*cos(fi) - p*sin(fi);
+            unsigned int rotz = fi == 0 ? p : c*sin(fi) + p*cos(fi);
+
+            // Build cilynder
+
+            if( x*x + y*y < radius*radius && x*x + y*y >= (radius-1)*(radius-1))
+                putVoxel(rotx,roty,rotz);
+
+        }
+      }
     }
 }
 

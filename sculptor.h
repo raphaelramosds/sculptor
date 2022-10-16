@@ -20,6 +20,8 @@ class Sculptor {
       void cutSphere(int xcenter, int ycenter, int zcenter, int radius);
       void putEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int ry, int rz);
       void cutEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int ry, int rz);
+      void putCylinder(int xcenter, int ycenter, int zcenter, int radius, int z1, float fi, char axis);
+      void cutCylinder(int xcenter, int ycenter, int zcenter, int radius, int z1);
       void writeOFF(const char* filename);
 };
 #endif // SCULPTOR_H
