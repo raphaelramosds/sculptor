@@ -21,6 +21,7 @@ class Sculptor {
       void putEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int ry, int rz);
       void cutEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int ry, int rz);
       void putCylinder(int xcenter, int ycenter, int zcenter, int radius, int height, char axis);
+      void putLine(int a, int b, int slope, int x0, int y0, int z0);
       void writeOFF(const char* filename);
 };
 #endif // SCULPTOR_H
