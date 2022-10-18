@@ -225,6 +225,8 @@ void Sculptor::putLine(int a, int b, int slope, int x0, int y0, int z0) {
     unsigned count = 0;
     for (int i = a; i <= b; i++) {
         putVoxel(x0 - slope,slope*i + y0, i + z0);
+        putVoxel(x0 - slope + 1,slope*i + y0, i + z0);
+        putVoxel(x0 - slope + 1,slope*i + y0 + 1, i + z0);
         count++;
     }
 

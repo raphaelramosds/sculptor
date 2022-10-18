@@ -25,10 +25,20 @@ int main()
     figura.putEllipsoid(16, 20, 7, 4 + scalex, 8, 4);
     figura.putCylinder(16, 20, 7, 4 + scalex, 5, 5, 'y');
 
+    // shirt
+
+
+
     // Body
 
     figura.setColor(240, 232, 8, 1.0);
     figura.putCylinder(16, 20, 7 + 1, 3 + scalex, 6, 18, 'y');
+
+    // Arms
+
+    figura.putLine(4, 10, 1, 15, 5, 10 - 7);
+    figura.putLine(4, 10, -1, 15, 35, 10 - 7);
+
 
     // Head
 
