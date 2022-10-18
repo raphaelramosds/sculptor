@@ -16,7 +16,7 @@ Sculptor::Sculptor(int _nx, int _ny, int _nz) {
 
     v[0] = new Voxel*[_nx * _nz];
 
-    for (int p = 1; p < _nz; p++)
+    for (int p = 1; p < nz; p++)
         v[p] = v[p - 1] + _nx;
 
     v[0][0] = new Voxel[_nx * _ny * _nz];
@@ -177,30 +177,40 @@ void Sculptor::cutEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int r
 
 // putCylinder: put a cylinder shifted of [x0 y0 z0] and rotate fi degrees it across z-axis
 
-void Sculptor::putCylinder(int xcenter, int ycenter, int zcenter, int radius, int height, char axis) {
-
+void Sculptor::putCylinder(int xcenter, int ycenter, int zcenter, int rx, int ry, int height, char axis) {
     float s = xcenter, t = ycenter;
 
     switch(axis) {
         case 'y': // Z
             for (int p = zcenter; p <= height + zcenter; p++) {
-              for (int l = s - radius; l < s + radius; l++) {
-                for (int c = t - radius; c < t + radius; c++) {
-                    float x = l - s;
-                    float y = c - t;
-                    if( x*x + y*y < radius*radius && x*x + y*y >= (radius-1)*(radius-1))
+              for (int l = s - rx; l <= s + rx; l++) {
+                for (int c = t - ry; c <= t + ry; c++) {
+
+                    float xe = (float)(l - s)/rx; // x "exterior"
+                    float ye = (float)(c - t)/ry;
+
+                    float xi = rx > 1 ? (float)(l - s)/(rx - 1) : true; // x "interior"
+                    float yi = ry > 1 ? (float)(c - t)/(ry - 1) : true;
+
+                    if( xe*xe + ye*ye <= 1 && xi*xi + yi*yi > 1)
                         putVoxel(l,c,p);
                 }
               }
             }
         break;
+
         case 'x': // y
             for (int l = s; l <= height + s; l++){
-                for (int p = zcenter - radius; p < zcenter + radius; p++) {
-                    for (int c = t - radius; c < t + radius; c++) {
-                        float z = p - zcenter;
-                        float y = c - t;
-                        if( z*z + y*y < radius*radius && z*z + y*y >= (radius-1)*(radius-1))
+                for (int p = zcenter - rx; p <= zcenter + rx; p++) {
+                    for (int c = t - ry; c <= t + ry; c++) {
+
+                        float ze = (float) (p - zcenter)/rx;
+                        float ye = (float) (c - t)/ry;
+
+                        float yi = rx > 1 ? (float)(p - zcenter)/(rx - 1) : true;
+                        float zi = ry > 1 ? (float)(c - t)/(ry - 1) : true;
+
+                        if(ze*ze + ye*ye <= 1 && zi*zi + yi*yi >1)
                             putVoxel(l,c,p);
                     }
                 }
@@ -212,10 +222,12 @@ void Sculptor::putCylinder(int xcenter, int ycenter, int zcenter, int radius, in
 // putLine
 
 void Sculptor::putLine(int a, int b, int slope, int x0, int y0, int z0) {
+    unsigned count = 0;
     for (int i = a; i <= b; i++) {
-        putVoxel(x0,slope*i + y0, i + z0);
-        putVoxel(x0 + 1,slope*i + y0, i + z0);
+        putVoxel(x0 - slope,slope*i + y0, i + z0);
+        count++;
     }
+
 }
 
 // writeOFF: exports a OFF file according with the given drawing instructions
@@ -230,7 +242,7 @@ void Sculptor::writeOFF(const char* filename) {
     for (int p = 0; p < nz; p++) {
         for (int l = 0; l < nx; l++) {
             for (int c = 0; c < ny; c++) {
-                if (v[p][l][c].isOn)
+                if (v[p][l][c].isOn == true)
                     voxels += 1;
             }
         }
@@ -261,7 +273,7 @@ void Sculptor::writeOFF(const char* filename) {
         for (int p = 0; p < nz; p++) {
             for (int l = 0; l < nx; l++) {
                 for (int c = 0; c < ny; c++) {
-                    if (v[p][l][c].isOn) {
+                    if (v[p][l][c].isOn == true) {
                         fout << -0.5 + l << " " <<  0.5 + c << " " << -0.5 + p << std::endl;
                         fout << -0.5 + l << " " << -0.5 + c << " " << -0.5 + p << std::endl;
                         fout <<  0.5 + l << " " << -0.5 + c << " " << -0.5 + p << std::endl;
@@ -283,7 +295,7 @@ void Sculptor::writeOFF(const char* filename) {
             for (int l = 0; l < nx; l++) {
                 for (int c = 0; c < ny; c++) {
 
-                    if (v[p][l][c].isOn) {
+                    if (v[p][l][c].isOn == true) {
                         // specicifies face whose vertexes have indexes [ a b c d ]
 
                         fout << 4 << " " << 0 + currface << " " << 3 + currface << " " << 2 + currface << " " << 1 + currface << " " << v[p][l][c].r << " " << v[p][l][c].g << " " << v[p][l][c].b << " " << v[p][l][c].a << std::endl;
