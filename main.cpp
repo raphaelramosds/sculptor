@@ -22,27 +22,48 @@ int main()
     figura.putCylinder(16, 16 + 2, 2, 1, 1, 5,'y');
     figura.putCylinder(16, 24 - 2, 2, 1, 1, 5, 'y');
 
-    figura.putEllipsoid(16, 20, 7, 4 + scalex, 8, 4);
-    figura.putCylinder(16, 20, 7, 4 + scalex, 5, 5, 'y');
+    figura.putEllipsoid(16, 20, 7, 4 + scalex, 7, 3);
 
-    // shirt
+    // Macacao
 
-
+    figura.putCylinder(16, 20, 7, 4 + scalex, 6, 5, 'y');
+    figura.putCylinder(16, 20, 11, 4 + scalex, 4 + scalex, 1, 'y');
 
     // Body
 
     figura.setColor(240, 232, 8, 1.0);
-    figura.putCylinder(16, 20, 7 + 1, 3 + scalex, 6, 18, 'y');
+    figura.putCylinder(16, 20, 7 + 1, 3 + scalex, 6, 20, 'y');
 
     // Arms
 
-    figura.putLine(4, 10, 1, 15, 5, 10 - 7);
-    figura.putLine(4, 10, -1, 15, 35, 10 - 7);
-
+    figura.putLine(4, 10, 0, 15, 5 + 8, 10 - 9);
+    figura.putLine(4, 10, 1, 15, 35 - 13, 10 - 5);
 
     // Head
 
-    figura.putEllipsoid(16, 20, 25 + 2, 2 + scalex, 6, 4);
+    figura.putEllipsoid(16, 20, 25 + 3, 2 + scalex, 6, 4);
+
+    // Mouth
+
+    figura.setColor(0, 0, 0, 1.0);
+    
+    figura.putBox(20 + 2 - 1, 20 + 2, 20 - 2, 24 - 2, 15, 15);
+
+    figura.setColor(240, 232, 8, 1.0);
+
+    figura.putCylinder(20, 20, 15, 2, 3, 2, 'x');
+    
+
+    // Tongue
+
+    figura.setColor(255, 0, 0, 1.0);
+
+    for (int j = 0; j < 3; j++) {
+        figura.putBox(20 + 2 - 1 + j, 20 + 2 + j, 21 - 2, 23 - 2, 15 + 0, 15 + 0);
+    }
+
+    figura.putVoxel(25,25 - 5,15);
+    
 
     // Eyes
 
@@ -59,7 +80,9 @@ int main()
     figura.setColor(211, 211, 211, 1.0);
     figura.putCylinder(20, 18 , 25, 3, 3, 3,'x');
     figura.putCylinder(20, 18 + 5, 25, 3, 3, 3,'x');
-    figura.putCylinder(20 - 5, 18 + 2, 25, 5 + 1, 5 + 2, 2, 'y');
+
+    figura.setColor(0, 0, 0, 1.0);
+    figura.putCylinder(20 - 5, 18 + 2, 25 - 1, 5 + 1, 5 + 2, 2, 'y');
 
     figura.writeOFF("figura.off");
 
