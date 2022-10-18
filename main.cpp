@@ -34,14 +34,22 @@ int main()
 
     figura.putEllipsoid(16, 20, 25 + 2, 2 + scalex, 6, 4);
 
-    // Eyes and glasses
+    // Eyes
 
     figura.setColor(255, 255, 255, 1.0);
-
     figura.putSphere(20,18,25,2);
+    figura.putSphere(20,18 + 5,25,2);
+
+    figura.setColor(93,59,26,1.0);
+    figura.putVoxel(21,18,25);
+    figura.putVoxel(21,18 + 5,25);
+
+    // Glasses
 
     figura.setColor(211, 211, 211, 1.0);
     figura.putCylinder(20, 18 , 25, 3, 3, 3,'x');
+    figura.putCylinder(20, 18 + 5, 25, 3, 3, 3,'x');
+    figura.putCylinder(20 - 5, 18 + 2, 25, 5 + 1, 5 + 2, 2, 'y');
 
     figura.writeOFF("figura.off");
 
