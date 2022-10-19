@@ -219,7 +219,7 @@ void Sculptor::putCylinder(int xcenter, int ycenter, int zcenter, int rx, int ry
     }
 }
 
-// putLine
+// putLine: creat a parametric line given initial and final points
 
 void Sculptor::putLine(int a, int b, int slope, int x0, int y0, int z0) {
     unsigned count = 0;
