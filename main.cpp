@@ -43,7 +43,8 @@ int main()
 
     // Macacao
 
-    figura.putBox(22,22,18 - 1,23,6,13);
+    figura.putBox(22, 22, 18 - 1, 23, 8, 13);
+    figura.putBox(22 - 12, 22 - 12, 18 - 1, 23, 8, 13);
 
     figura.putVoxel(22, 23, 13);
     figura.putVoxel(22, 23 - 6, 13);
@@ -63,9 +64,13 @@ int main()
     figura.putBox(13, 20, 25, 26, 17 - 3, 17 - 3);
     figura.putBox(13, 20, 25 - 11, 26 - 11, 17 - 3, 17 - 3);
 
+    figura.setColor(0,0,0,1.0);
+    figura.putCylinder(21,18 + 2,8 + 2,2,2,1,'x');
+
     // Gloves
 
     figura.setColor(0, 0, 0, 1.0);
+    figura.putLine(9, 10, -1, 15 - 1, 35 - 18, 10 - 3);
     figura.putBox(20 - 4, 21 - 4, 30, 32, 17 - 6, 18 - 6);
 
     // Mouth
@@ -95,7 +100,7 @@ int main()
     figura.setColor(0, 0, 0, 1.0);
     figura.putCylinder(20 - 5, 18 + 2, 25 - 1, 5 + 1, 5 + 2, 2, 'y');
 
-    figura.writeOFF("figura.off");
+    figura.writeOFF("keven.off");
 
     return 0;
 }
