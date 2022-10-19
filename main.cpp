@@ -15,6 +15,23 @@ int main()
     figura.putBox(15, 20, 15 + 2, 17 + 2, 0, 1);
     figura.putBox(15, 20, 23 - 2, 25 - 2, 0, 1);
 
+    // Body
+
+    figura.setColor(240, 232, 8, 1.0);
+    figura.putCylinder(16, 20, 7 + 1, 3 + scalex, 6, 20, 'y');
+
+    figura.cutBox(21 + 1, 21 + 1, 18 + 2, 18 + 2, 13, 22);
+    figura.putBox(21 + 1 - 1, 21 + 1 - 1, 18 + 2, 18 + 2, 13, 22);
+
+    // Arms
+
+    figura.putLine(4, 10, -1, 15 - 1, 35 - 18, 10 - 3);
+    figura.putBox(20 - 4, 21 - 4, 25, 32, 17 - 6, 18 - 6);
+
+    // Head
+
+    figura.putEllipsoid(16, 20, 25 + 3, 2 + scalex, 6, 4);
+
     // Pants
 
     figura.setColor(8, 103, 147, 1.0);
@@ -26,26 +43,30 @@ int main()
 
     // Macacao
 
-    figura.putCylinder(16, 20, 7, 4 + scalex, 6, 5, 'y');
-    figura.putCylinder(16, 20, 11, 4 + scalex, 4 + scalex, 1, 'y');
+    figura.putBox(22,22,18 - 1,23,6,13);
 
-    // Body
+    figura.putVoxel(22, 23, 13);
+    figura.putVoxel(22, 23 - 6, 13);
+    
+    figura.putVoxel(22 - 2, 23 + 2, 13 + 1);
+    figura.putVoxel(22 - 2, 23 - 6 - 2, 13 + 1);
 
-    figura.setColor(240, 232, 8, 1.0);
-    figura.putCylinder(16, 20, 7 + 1, 3 + scalex, 6, 20, 'y');
+    figura.putVoxel(22 - 2, 23 + 2, 13);
+    figura.putVoxel(22 - 2, 23 - 6 - 2, 13);
+    
+    figura.putVoxel(22 - 2 + 1, 23 + 2, 13);
+    figura.putVoxel(22 - 2 + 1, 23 - 6 - 2, 13);
 
+    figura.putVoxel(22 - 2 + 1, 23 + 2 - 1, 13);
+    figura.putVoxel(22 - 2 + 1, 23 - 6 - 2 + 1, 13);
 
-    figura.cutBox(21 + 1, 21 + 1, 18 + 2, 18 + 2, 13, 22);
-    figura.putBox(21 + 1 - 1, 21 + 1 - 1, 18 + 2, 18 + 2, 13, 22);
+    figura.putBox(13, 20, 25, 26, 17 - 3, 17 - 3);
+    figura.putBox(13, 20, 25 - 11, 26 - 11, 17 - 3, 17 - 3);
 
-    // Arms
+    // Gloves
 
-    figura.putLine(4, 10, 0, 15, 5 + 8, 10 - 9);
-    figura.putLine(4, 10, 1, 15, 35 - 13, 10 - 5);
-
-    // Head
-
-    figura.putEllipsoid(16, 20, 25 + 3, 2 + scalex, 6, 4);
+    figura.setColor(0, 0, 0, 1.0);
+    figura.putBox(20 - 4, 21 - 4, 30, 32, 17 - 6, 18 - 6);
 
     // Mouth
 
