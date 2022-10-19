@@ -34,6 +34,10 @@ int main()
     figura.setColor(240, 232, 8, 1.0);
     figura.putCylinder(16, 20, 7 + 1, 3 + scalex, 6, 20, 'y');
 
+
+    figura.cutBox(21 + 1, 21 + 1, 18 + 2, 18 + 2, 13, 22);
+    figura.putBox(21 + 1 - 1, 21 + 1 - 1, 18 + 2, 18 + 2, 13, 22);
+
     // Arms
 
     figura.putLine(4, 10, 0, 15, 5 + 8, 10 - 9);
@@ -47,23 +51,9 @@ int main()
 
     figura.setColor(0, 0, 0, 1.0);
     
-    figura.putBox(20 + 2 - 1, 20 + 2, 20 - 2, 24 - 2, 15, 15);
-
-    figura.setColor(240, 232, 8, 1.0);
-
-    figura.putCylinder(20, 20, 15, 2, 3, 2, 'x');
-    
-
-    // Tongue
-
-    figura.setColor(255, 0, 0, 1.0);
-
-    for (int j = 0; j < 3; j++) {
-        figura.putBox(20 + 2 - 1 + j, 20 + 2 + j, 21 - 2, 23 - 2, 15 + 0, 15 + 0);
-    }
-
-    figura.putVoxel(25,25 - 5,15);
-    
+    figura.putBox(21, 21, 19, 21, 15, 15);
+    figura.putVoxel(21,18,16);
+    figura.putVoxel(21,22,16);
 
     // Eyes
 
