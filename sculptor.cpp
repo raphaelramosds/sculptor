@@ -23,6 +23,13 @@ Sculptor::Sculptor(int _nx, int _ny, int _nz) {
 
     for (int l = 1; l < _nx * _nz; l++ )
         v[0][l] = v[0][l - 1] + _ny;
+	
+	// Set initial value of all elements to isOn = false
+	// one need to do that because you aren't sure if the initial
+	// value is true (it can be anything)
+	
+	for (int l = 1; l < _nx * _nz * _ny; l++ )
+        v[0][0][l].isOn = false;
 }
 
 // @destructor ~Sculptor: deallocate a 3D matrix
@@ -175,63 +182,6 @@ void Sculptor::cutEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int r
     }
 }
 
-// putCylinder: put a cylinder shifted of [x0 y0 z0] and rotate fi degrees it across z-axis
-
-void Sculptor::putCylinder(int xcenter, int ycenter, int zcenter, int rx, int ry, int height, char axis) {
-    float s = xcenter, t = ycenter;
-
-    switch(axis) {
-        case 'y': // Z
-            for (int p = zcenter; p <= height + zcenter; p++) {
-              for (int l = s - rx; l <= s + rx; l++) {
-                for (int c = t - ry; c <= t + ry; c++) {
-
-                    float xe = (float)(l - s)/rx; // x "exterior"
-                    float ye = (float)(c - t)/ry;
-
-                    float xi = rx > 1 ? (float)(l - s)/(rx - 1) : true; // x "interior"
-                    float yi = ry > 1 ? (float)(c - t)/(ry - 1) : true;
-
-                    if( xe*xe + ye*ye <= 1 && xi*xi + yi*yi > 1)
-                        putVoxel(l,c,p);
-                }
-              }
-            }
-        break;
-
-        case 'x': // y
-            for (int l = s; l <= height + s; l++){
-                for (int p = zcenter - rx; p <= zcenter + rx; p++) {
-                    for (int c = t - ry; c <= t + ry; c++) {
-
-                        float ze = (float) (p - zcenter)/rx;
-                        float ye = (float) (c - t)/ry;
-
-                        float yi = rx > 1 ? (float)(p - zcenter)/(rx - 1) : true;
-                        float zi = ry > 1 ? (float)(c - t)/(ry - 1) : true;
-
-                        if(ze*ze + ye*ye <= 1 && zi*zi + yi*yi >1)
-                            putVoxel(l,c,p);
-                    }
-                }
-            }
-        break;
-    }
-}
-
-// putLine: create a parametric line given initial and final points
-
-void Sculptor::putLine(int a, int b, int slope, int x0, int y0, int z0) {
-    unsigned count = 0;
-    for (int i = a; i <= b; i++) {
-        putVoxel(x0 - slope,slope*i + y0, i + z0);
-        putVoxel(x0 - slope + 1,slope*i + y0, i + z0);
-        putVoxel(x0 - slope + 1,slope*i + y0 + 1, i + z0);
-        count++;
-    }
-
-}
-
 // writeOFF: exports a OFF file according with the given drawing instructions
 
 void Sculptor::writeOFF(const char* filename) {
@@ -272,6 +222,8 @@ void Sculptor::writeOFF(const char* filename) {
 
         std::cout << "log: building vertexes coordinates" << std::endl;
 
+		fout << std::fixed; // @enumerate fixed: força a saida como nomenclatura de ponto fixo. Ex: 3.59 -> 3.590000
+		
         for (int p = 0; p < nz; p++) {
             for (int l = 0; l < nx; l++) {
                 for (int c = 0; c < ny; c++) {
