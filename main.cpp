@@ -33,7 +33,7 @@ int main()
     // Arms
 
     putLine(4, 10, -1, 15 - 1, 35 - 18, 10 - 3, figura);
-    figura.putBox(20 - 4, 21 - 4, 25, 32, 17 - 6, 18 - 6);
+    figura.putBox(19 - 4, 21 - 4, 25, 32, 17 - 6, 18 - 6);
 
     // Head
 
@@ -71,6 +71,29 @@ int main()
     figura.putBox(13, 20, 25, 26, 17 - 3, 17 - 3);
     figura.putBox(13, 20, 25 - 11, 26 - 11, 17 - 3, 17 - 3);
 
+    figura.putVoxel(21 - 9,26 - 1,14);
+    figura.putVoxel(21 - 9,14 + 1,14);
+
+    figura.putVoxel(21 - 9, 26, 14);
+    figura.putVoxel(21 - 9, 14, 14);
+
+    figura.putVoxel(21 - 9 - 1, 26 - 2, 14);
+    figura.putVoxel(21 - 9 - 1, 14 + 2, 14);
+
+    figura.putVoxel(21 - 9 - 1, 26 - 2, 13);
+    figura.putVoxel(21 - 9 - 1, 14 + 2, 13);
+
+    figura.putVoxel(21 - 9 - 2, 26 - 2, 13);
+    figura.putVoxel(21 - 9 - 2, 14 + 2, 13);
+
+    figura.setColor(y[0], y[1], y[2], y[3]);
+
+    figura.putVoxel(17,26 - 1,9);
+    figura.putVoxel(17,14 + 1,9);
+
+    figura.putVoxel(15,26 - 1,9);
+    figura.putVoxel(15,14 + 1,9);
+
     figura.setColor(k[0],k[1],k[2],k[3]);
 	
     putCylinder(21,18 + 2,8 + 2,2,2,1,'x',figura);
@@ -78,7 +101,7 @@ int main()
     // Gloves
 
     putLine(9, 10, -1, 15 - 1, 35 - 18, 10 - 3,figura);
-    figura.putBox(20 - 4, 21 - 4, 30, 32, 17 - 6, 18 - 6);
+    figura.putBox(19 - 4, 21 - 4, 30, 32, 17 - 6, 18 - 6);
 
     // Mouth
     
@@ -155,14 +178,17 @@ void putCylinder(int xcenter, int ycenter, int zcenter, int rx, int ry, int heig
     }
 }
 
-// putLine: create a parametric line given initial and final points
+// putLine: create parametric lines given initial and final points
 
 void putLine(int a, int b, int slope, int x0, int y0, int z0, Sculptor& object) {
     unsigned count = 0;
     for (int i = a; i <= b; i++) {
-        object.putVoxel(x0 - slope,slope*i + y0, i + z0);
-        object.putVoxel(x0 - slope + 1,slope*i + y0, i + z0);
+        object.putVoxel(x0 - slope,slope*i + y0 + 1, i + z0);
         object.putVoxel(x0 - slope + 1,slope*i + y0 + 1, i + z0);
+        object.putVoxel(x0 - slope + 2,slope*i + y0 + 1, i + z0);
+        object.putVoxel(x0 - slope,slope*i + y0 + 1, i + z0 - 1);
+        object.putVoxel(x0 - slope + 1,slope*i + y0 + 1, i + z0 - 1);
+        object.putVoxel(x0 - slope + 2,slope*i + y0 + 1, i + z0 - 1);
         count++;
     }
 
