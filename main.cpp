@@ -32,7 +32,11 @@ int main()
 
     // Arms
 
-    putLine(4, 10, -1, 15 - 1, 35 - 18, 10 - 3, figura);
+    for (int j = 0; j < 3; j++) {
+        putLine(4, 10, -1, 15 - 1 + j, 35 - 17, 10 - 3, figura);
+        putLine(4, 10, -1, 15 - 1 + j, 35 - 17, 10 - 2, figura);
+    }
+
     figura.putBox(19 - 4, 21 - 4, 25, 32, 17 - 6, 18 - 6);
 
     // Head
@@ -101,7 +105,11 @@ int main()
 
     // Gloves
 
-    putLine(9, 10, -1, 15 - 1, 35 - 18, 10 - 3,figura);
+    for (int j = 0; j < 3; j++) {
+        putLine(9, 10, -1, 15 - 1 + j, 35 - 18, 10 - 2, figura);
+        putLine(9, 10, -1, 15 - 1 + j, 35 - 17, 10 - 2, figura);
+
+    }
     figura.putBox(19 - 4, 21 - 4, 30, 32, 17 - 6, 18 - 6);
 
     // Mouth
@@ -198,12 +206,7 @@ void putCylinder(int xcenter, int ycenter, int zcenter, int rx, int ry, int heig
 void putLine(int a, int b, int slope, int x0, int y0, int z0, Sculptor& object) {
     unsigned count = 0;
     for (int i = a; i <= b; i++) {
-        object.putVoxel(x0 - slope, slope*i + y0 + 1, i + z0);
-        object.putVoxel(x0 - slope + 1,slope*i + y0 + 1, i + z0);
-        object.putVoxel(x0 - slope + 2,slope*i + y0 + 1, i + z0);
-        object.putVoxel(x0 - slope, slope*i + y0 + 1, i + z0 - 1);
-        object.putVoxel(x0 - slope + 1,slope*i + y0 + 1, i + z0 - 1);
-        object.putVoxel(x0 - slope + 2,slope*i + y0 + 1, i + z0 - 1);
+        object.putVoxel(x0 - slope, slope*i + y0, i + z0);
         count++;
     }
 
