@@ -11,7 +11,7 @@ int main()
 
     unsigned int scalex = 3;
 	
-	float y[4] = {0.95,0.95,0,1};
+	float y[4] = {0.95,0.92,0,1};
 	float k[4] = {0.0,0.0,0.0,1.0};
 	float b[4] = {0.0,0.4,0.5,1.0};
 
@@ -106,9 +106,9 @@ int main()
 
     // Mouth
     
-    figura.putBox(21, 21, 19, 21, 15, 15);
-    figura.putVoxel(21,18,16);
-    figura.putVoxel(21,22,16);
+    figura.putBox(21, 21, 19, 21, 15 + 1, 15 + 1);
+    figura.putVoxel(21,18,16 + 1);
+    figura.putVoxel(21,22,16 + 1);
 
     // Eyes
 
