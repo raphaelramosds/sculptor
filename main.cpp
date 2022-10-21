@@ -11,7 +11,7 @@ int main()
 
     unsigned int scalex = 3;
 	
-	float y[4] = {0.95,0.92,0,1};
+	float y[4] = {1.0,0.84,0.39,1};
 	float k[4] = {0.0,0.0,0.0,1.0};
 	float b[4] = {0.0,0.4,0.5,1.0};
 
