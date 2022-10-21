@@ -93,8 +93,8 @@ void Sculptor::cutBox(int x0, int x1, int y0, int y1, int z0, int z1) {
     }
 }
 
-/// Note: no need to loop over all the voxes! I defined a box that contains the
-/// volume and only iterate within it
+// Note: no need to loop over all the voxes! I defined a box that contains the
+// volume and only iterate within it
 
 // putSphere: put a sphere whose center is [ xcenter ycenter zcenter ]
 
