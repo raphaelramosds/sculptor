@@ -97,6 +97,7 @@ int main()
     figura.setColor(k[0],k[1],k[2],k[3]);
 	
     putCylinder(21,18 + 2,8 + 2,2,2,1,'x',figura);
+    figura.putVoxel(22,20,10);
 
     // Gloves
 
@@ -127,6 +128,20 @@ int main()
 
     figura.setColor(b[0], b[0], b[0], b[0]);
     putCylinder(20 - 5, 18 + 2, 25 - 1, 5 + 1, 5 + 2, 2, 'y',figura);
+
+    // Hair
+
+    for (int j = 0; j < 5; j++) {
+
+        figura.putVoxel(16,20,31 + j + 1);
+        figura.putVoxel(16,21,30 + j);
+        figura.putVoxel(16,19,30 + j);
+    }
+
+
+    figura.putVoxel(16,22,35);
+    figura.putVoxel(16,18,35);
+    
 
     figura.writeOFF("keven.off");
 
@@ -178,15 +193,15 @@ void putCylinder(int xcenter, int ycenter, int zcenter, int rx, int ry, int heig
     }
 }
 
-// putLine: create parametric lines given initial and final points
+// putLine: create parametric line given initial and final points
 
 void putLine(int a, int b, int slope, int x0, int y0, int z0, Sculptor& object) {
     unsigned count = 0;
     for (int i = a; i <= b; i++) {
-        object.putVoxel(x0 - slope,slope*i + y0 + 1, i + z0);
+        object.putVoxel(x0 - slope, slope*i + y0 + 1, i + z0);
         object.putVoxel(x0 - slope + 1,slope*i + y0 + 1, i + z0);
         object.putVoxel(x0 - slope + 2,slope*i + y0 + 1, i + z0);
-        object.putVoxel(x0 - slope,slope*i + y0 + 1, i + z0 - 1);
+        object.putVoxel(x0 - slope, slope*i + y0 + 1, i + z0 - 1);
         object.putVoxel(x0 - slope + 1,slope*i + y0 + 1, i + z0 - 1);
         object.putVoxel(x0 - slope + 2,slope*i + y0 + 1, i + z0 - 1);
         count++;
