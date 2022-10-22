@@ -41,7 +41,7 @@ int main()
 
     // Head
 
-    figura.putEllipsoid(16, 20, 25 + 3, 2 + scalex, 6, 4);
+    figura.putEllipsoid(16, 20, 25 + 3, 3 + scalex, 6, 4);
 
     // Pants
 
