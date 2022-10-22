@@ -31,7 +31,8 @@ class Sculptor {
       ~Sculptor();
 
       /**
-       * @details Set the drawing current color
+       * @details Set the drawing current color, you can set it within 0.0 to 1.0.
+       * If you want to pass a specific RGB color `C`, just calculate `C/255`
        * */
 
       void setColor(float r, float g, float b, float a);
@@ -61,13 +62,13 @@ class Sculptor {
       void cutBox(int x0, int x1, int y0, int y1, int z0, int z1);
 
       /**
-       * @details Put a sphere whose center in X, Y and Z are `xcenter`, `ycenter` and `zcenter`
+       * @details Put a sphere of radius `radius` Put an ellipsoid whose center in X, Y and Z are `xcenter`, `ycenter` and `zcenter`, respectively
        **/
 
       void putSphere(int xcenter, int ycenter, int zcenter, int radius);
 
       /**
-       * @details Remove a sphere whose center in X, Y and Z are `xcenter`, `ycenter` and `zcenter`
+       * @details Remove a sphere of radius `radius` Put an ellipsoid whose center in X, Y and Z are `xcenter`, `ycenter` and `zcenter`, respectively
        * */
 
       void cutSphere(int xcenter, int ycenter, int zcenter, int radius);
@@ -85,7 +86,7 @@ class Sculptor {
       void cutEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int ry, int rz);
 
       /**
-       * @details Exports a OFF file according with the given drawing instructions
+       * @details Exports a OFF file on the current directory, according with the given drawing instructions
        * */
 
       void writeOFF(const char* filename);
