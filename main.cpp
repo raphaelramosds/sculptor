@@ -114,9 +114,9 @@ int main()
 
     // Mouth
     
-    figura.putBox(21, 21, 19, 21, 15 + 1, 15 + 1);
-    figura.putVoxel(21,18,16 + 1);
-    figura.putVoxel(21,22,16 + 1);
+    figura.putBox(21, 21, 19, 21, 15, 15);
+    figura.putVoxel(21,18,16);
+    figura.putVoxel(21,22,16);
 
     // Eyes
 
@@ -139,17 +139,25 @@ int main()
 
     // Hair
 
-    for (int j = 0; j < 5; j++) {
-
-        figura.putVoxel(16,20,31 + j + 1);
-        figura.putVoxel(16,21,30 + j);
-        figura.putVoxel(16,19,30 + j);
+    for (int j = 0; j < 2; j++) {
+        figura.putVoxel(16 - 1, 20, 31 + j + 1);
+        figura.putVoxel(16, 20, 31 + j + 1);
+        figura.putVoxel(16 + 1, 20, 31 + j + 1);
     }
 
+    figura.putVoxel(18,20,34);
+    figura.putVoxel(18 - 4,20,34);
 
-    figura.putVoxel(16,22,35);
-    figura.putVoxel(16,18,35);
-    
+    for (int j = 0; j < 3; j++) {
+
+        figura.putVoxel(16, 20 - 1, 32 + j);
+        figura.putVoxel(16, 20 + 1, 32 + j);
+
+        figura.putVoxel(16, 22 + j - 2, 35 + j - 1);
+        figura.putVoxel(16, 19 - j + 1, 35 + j - 1);
+    }
+
+    // Export off
 
     figura.writeOFF("keven.off");
 
