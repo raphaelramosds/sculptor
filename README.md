@@ -4,7 +4,6 @@
 
 | Sample - Keven | 
 | :---: |
-| <img src="../assets/keven.png" style="width:400px"/> |
 | <img src="./assets/keven.png" style="width:400px"/> |
 
 </div>
