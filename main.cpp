@@ -42,6 +42,7 @@ int main()
     // Head
 
     figura.putEllipsoid(16, 20, 25 + 3, 3 + scalex, 6, 4);
+    figura.cutEllipsoid(16, 20, 25 + 3, 3 + scalex - 1, 6 - 1, 4 - 1);
 
     // Pants
 
@@ -51,6 +52,7 @@ int main()
     putCylinder(16, 24 - 2, 2, 1, 1, 5, 'y',figura);
 
     figura.putEllipsoid(16, 20, 7, 4 + scalex, 7, 3);
+    figura.cutEllipsoid(16, 20, 7, 4 + scalex - 1, 6, 2);
 
     // Macacao
 
@@ -102,9 +104,15 @@ int main()
 	
     putCylinder(21,18 + 2,8 + 2,2,2,1,'x',figura);
     figura.putVoxel(22,20,10);
+    figura.cutVoxel(9,20,7);
+
+    figura.setColor(b[0],b[1],b[2],b[3]);
+    figura.putVoxel(10,20,7);
 
     // Gloves
 
+    figura.setColor(k[0],k[1],k[2],k[3]);
+    
     for (int j = 0; j < 3; j++) {
         putLine(9, 10, -1, 15 - 1 + j, 35 - 18, 10 - 2, figura);
         putLine(9, 10, -1, 15 - 1 + j, 35 - 17, 10 - 2, figura);
@@ -122,6 +130,7 @@ int main()
 
     figura.setColor(1.0, 1.0, 1.0, 1.0);
     figura.putSphere(20,18,25,2);
+    figura.cutSphere(20,18,25,1);
     figura.putSphere(20,18 + 5,25,2);
 
     figura.setColor(0.35,0.23,0.10,1.0);
