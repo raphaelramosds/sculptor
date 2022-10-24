@@ -16,4 +16,4 @@ Briefly, Sculptor allocates a 3D matrix of type `Voxel`, a struct, dinamically a
 
 ## How to use
 
-You can also use this class. Just clone this repository and see the documentation, available on [Scultpor](https://raphaelramosds.github.io/sculptor/index.html)
+You can also use this class. Just clone this repository and see the documentation, available on [Sculptor](https://raphaelramosds.github.io/sculptor/index.html)
