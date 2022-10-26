@@ -4,6 +4,172 @@
 int main()
 {
 
+<<<<<<< HEAD
   
+=======
+    Sculptor figura(51,51,71);
+
+    unsigned int scalex = 3;
+	
+	float y[4] = {1.0,0.84,0.39,1};
+	float k[4] = {0.0,0.0,0.0,1.0};
+	float b[4] = {0.0,0.4,0.5,1.0};
+
+    // Shoes
+
+    figura.setColor(k[0],k[1],k[2],k[3]);
+
+    figura.putBox(15, 20, 15 + 2, 17 + 2, 0, 1);
+    figura.putBox(15, 20, 23 - 2, 25 - 2, 0, 1);
+
+    // Body
+
+    figura.setColor(y[0], y[1], y[2], y[3]);
+    putCylinder(16, 20, 7 + 1, 3 + scalex, 6, 20,'y',figura);
+
+    figura.cutBox(21 + 1, 21 + 1, 18 + 2, 18 + 2, 13, 22);
+    figura.putBox(21 + 1 - 1, 21 + 1 - 1, 18 + 2, 18 + 2, 13, 22);
+
+    // Arms
+
+    for (int j = 0; j < 3; j++) {
+        putLine(4, 10, -1, 15 - 1 + j, 35 - 17, 10 - 3, figura);
+        putLine(4, 10, -1, 15 - 1 + j, 35 - 17, 10 - 2, figura);
+    }
+
+    figura.putBox(19 - 4, 21 - 4, 25, 32, 17 - 6, 18 - 6);
+
+    // Head
+
+    figura.putEllipsoid(16, 20, 25 + 3, 3 + scalex, 6, 4);
+    figura.cutEllipsoid(16, 20, 25 + 3, 3 + scalex - 1, 6 - 1, 4 - 1);
+
+    // Pants
+
+    figura.setColor(b[0], b[1], b[2], b[3]);
+
+    putCylinder(16, 16 + 2, 2, 1, 1, 5,'y',figura);
+    putCylinder(16, 24 - 2, 2, 1, 1, 5, 'y',figura);
+
+    figura.putEllipsoid(16, 20, 7, 4 + scalex, 7, 3);
+    figura.cutEllipsoid(16, 20, 7, 4 + scalex - 1, 6, 2);
+
+    // Macacao
+
+    figura.putBox(22, 22, 18 - 1, 23, 8, 13);
+    figura.putBox(22 - 12, 22 - 12, 18 - 1, 23, 8, 13);
+
+    figura.putVoxel(22, 23, 13);
+    figura.putVoxel(22, 23 - 6, 13);
+    
+    figura.putVoxel(22 - 2, 23 + 2, 13 + 1);
+    figura.putVoxel(22 - 2, 23 - 6 - 2, 13 + 1);
+
+    figura.putVoxel(22 - 2, 23 + 2, 13);
+    figura.putVoxel(22 - 2, 23 - 6 - 2, 13);
+    
+    figura.putVoxel(22 - 2 + 1, 23 + 2, 13);
+    figura.putVoxel(22 - 2 + 1, 23 - 6 - 2, 13);
+
+    figura.putVoxel(22 - 2 + 1, 23 + 2 - 1, 13);
+    figura.putVoxel(22 - 2 + 1, 23 - 6 - 2 + 1, 13);
+
+    figura.putBox(13, 20, 25, 26, 17 - 3, 17 - 3);
+    figura.putBox(13, 20, 25 - 11, 26 - 11, 17 - 3, 17 - 3);
+
+    figura.putVoxel(21 - 9,26 - 1,14);
+    figura.putVoxel(21 - 9,14 + 1,14);
+
+    figura.putVoxel(21 - 9, 26, 14);
+    figura.putVoxel(21 - 9, 14, 14);
+
+    figura.putVoxel(21 - 9 - 1, 26 - 2, 14);
+    figura.putVoxel(21 - 9 - 1, 14 + 2, 14);
+
+    figura.putVoxel(21 - 9 - 1, 26 - 2, 13);
+    figura.putVoxel(21 - 9 - 1, 14 + 2, 13);
+
+    figura.putVoxel(21 - 9 - 2, 26 - 2, 13);
+    figura.putVoxel(21 - 9 - 2, 14 + 2, 13);
+
+    figura.setColor(y[0], y[1], y[2], y[3]);
+
+    figura.putVoxel(17,26 - 1,9);
+    figura.putVoxel(17,14 + 1,9);
+
+    figura.putVoxel(15,26 - 1,9);
+    figura.putVoxel(15,14 + 1,9);
+
+    figura.setColor(k[0],k[1],k[2],k[3]);
+	
+    putCylinder(21,18 + 2,8 + 2,2,2,1,'x',figura);
+    figura.putVoxel(22,20,10);
+    figura.cutVoxel(9,20,7);
+
+    figura.setColor(b[0],b[1],b[2],b[3]);
+    figura.putVoxel(10,20,7);
+
+    // Gloves
+
+    figura.setColor(k[0],k[1],k[2],k[3]);
+    
+    for (int j = 0; j < 3; j++) {
+        putLine(9, 10, -1, 15 - 1 + j, 35 - 18, 10 - 2, figura);
+        putLine(9, 10, -1, 15 - 1 + j, 35 - 17, 10 - 2, figura);
+
+    }
+    figura.putBox(19 - 4, 21 - 4, 30, 32, 17 - 6, 18 - 6);
+
+    // Mouth
+    
+    figura.putBox(21, 21, 19, 21, 15, 15);
+    figura.putVoxel(21,18,16);
+    figura.putVoxel(21,22,16);
+
+    // Eyes
+
+    figura.setColor(1.0, 1.0, 1.0, 1.0);
+    figura.putSphere(20,18,25,2);
+    figura.cutSphere(20,18,25,1);
+    figura.putSphere(20,18 + 5,25,2);
+
+    figura.setColor(0.35,0.23,0.10,1.0);
+    figura.putVoxel(21,18,25);
+    figura.putVoxel(21,18 + 5,25);
+
+    // Glasses
+
+    figura.setColor(0.82, 0.82, 0.82, 1.0);
+    putCylinder(20, 18 , 25, 3, 3, 3,'x',figura);
+    putCylinder(20, 18 + 5, 25, 3, 3, 3,'x',figura);
+
+    figura.setColor(b[0], b[0], b[0], b[0]);
+    putCylinder(20 - 5, 18 + 2, 25 - 1, 5 + 1, 5 + 2, 2, 'y',figura);
+
+    // Hair
+
+    for (int j = 0; j < 2; j++) {
+        figura.putVoxel(16 - 1, 20, 31 + j + 1);
+        figura.putVoxel(16, 20, 31 + j + 1);
+        figura.putVoxel(16 + 1, 20, 31 + j + 1);
+    }
+
+    figura.putVoxel(18,20,34);
+    figura.putVoxel(18 - 4,20,34);
+
+    for (int j = 0; j < 3; j++) {
+
+        figura.putVoxel(16, 20 - 1, 32 + j);
+        figura.putVoxel(16, 20 + 1, 32 + j);
+
+        figura.putVoxel(16, 22 + j - 2, 35 + j - 1);
+        figura.putVoxel(16, 19 - j + 1, 35 + j - 1);
+    }
+
+    // Export off
+
+    figura.writeOFF("keven.off");
+
+>>>>>>> 1fc32206d36da7dd034005049cd110b2c47ddd01
     return 0;
 }
