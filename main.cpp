@@ -129,7 +129,7 @@ int main()
     putCylinder(20, 23, 25, 3, 3, 3,'x',figura);
 
     figura.setColor(b[0], b[0], b[0], b[0]);
-    putCylinder(15, 20, 24, 5 + 1, 7, 2, 'y',figura);
+    putCylinder(15, 20, 24, 6, 7, 2, 'y',figura);
 
     // Hair
 
