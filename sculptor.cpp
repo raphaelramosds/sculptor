@@ -6,76 +6,115 @@
 
 // @constructor Sculptor: allocate a 3D matrix
 
-Sculptor::Sculptor(int _nx, int _ny, int _nz) {
+Sculptor::Sculptor(int _nx, int _ny, int _nz)
+{
 
-    nx = _nx; ny = _ny; nz = _nz;
+    nx = _nx;
+    ny = _ny;
+    nz = _nz;
+
+    //
+    
+    fout.open("assets/instrucoes.txt");
+    fout << "dim " << _nx << " " << _ny << " " << _nz << std::endl;
+
+    // Allocating 3D matrix
 
     std::cout << "log: allocating matrix" << std::endl;
 
-    v = new Voxel**[_nz];
+    v = new Voxel **[_nz];
 
-    v[0] = new Voxel*[_nx * _nz];
+    v[0] = new Voxel *[_nx * _nz];
 
     for (int p = 1; p < nz; p++)
         v[p] = v[p - 1] + _nx;
 
     v[0][0] = new Voxel[_nx * _ny * _nz];
 
-    for (int l = 1; l < _nx * _nz; l++ )
+    for (int l = 1; l < _nx * _nz; l++)
         v[0][l] = v[0][l - 1] + _ny;
-	
-	// Set initial value of all elements to isOn = false
-	// one need to do that because you aren't sure if the initial
-	// value is true (it can be anything)
-	
-	for (int l = 1; l < _nx * _nz * _ny; l++ )
+
+    // Set initial value of all elements to isOn = false
+    // one need to do that because you aren't sure if the initial
+    // value is true (it can be anything)
+
+    for (int l = 1; l < _nx * _nz * _ny; l++)
         v[0][0][l].isOn = false;
 }
 
 // @destructor ~Sculptor: deallocate a 3D matrix
 
-Sculptor::~Sculptor() {
+Sculptor::~Sculptor()
+{
     std::cout << "log: deallocating matrix" << std::endl;
     delete v[0][0];
     delete v[0];
     delete v;
+    fout.close();
 }
 
 // setColor: set current color
 
-void Sculptor::setColor(float r, float g, float b, float a) {
-    this->r = r; this->g = g; this->b = b; this->a = a;
+void Sculptor::setColor(float r, float g, float b, float a)
+{
+    this->r = r;
+    this->g = g;
+    this->b = b;
+    this->a = a;
 }
 
 // putVoxel: put a voxel on a specific index [x][y][z]
 
-void Sculptor::putVoxel(int x, int y, int z) {
-    if ((x < nx && x >= 0) && (y < ny && y >= 0) && (z < nz && z >= 0)) {
+void Sculptor::putVoxel(int x, int y, int z)
+{
+    if ((x < nx && x >= 0) && (y < ny && y >= 0) && (z < nz && z >= 0))
+    {
         v[x][y][z].isOn = true;
-        v[x][y][z].r = r; v[x][y][z].g = g; v[x][y][z].b = b;
+        v[x][y][z].r = r;
+        v[x][y][z].g = g;
+        v[x][y][z].b = b;
         v[x][y][z].a = a;
-    } else {
+        fout << "putvoxel " << x << " " << y << " " << z << " "
+             << this->r << " " << this->g << " " << this->b << " " << this->a << std::endl;
+    }
+    else
+    {
         std::cout << "error: incorrect index";
     }
 }
 
 // cutVoxel: remove a voxel of a specific index [x][y][z]
 
-void Sculptor::cutVoxel(int x, int y, int z) {
-    if ((x < nx && x >= 0) && (y < ny && y >= 0) && (z < nz && z >= 0)) {
+void Sculptor::cutVoxel(int x, int y, int z)
+{
+    if ((x < nx && x >= 0) && (y < ny && y >= 0) && (z < nz && z >= 0))
+    {
         v[x][y][z].isOn = false;
-    } else {
+        fout << "cutvoxel " << x << " " << y << " " << z << std::endl;
+    }
+    else
+    {
         std::cout << "error: incorrect index";
     }
 }
 
 // putBox: enable all voxels on range x0 to x1, y0 to y1 and z0 to z1 and set to the current color
 
-void Sculptor::putBox(int x0, int x1, int y0, int y1, int z0, int z1) {
-    for (int p = z0; p <= z1; p++) {
-        for (int l = x0; l <= x1; l++) {
-            for (int c = y0; c <= y1; c++) {
-                putVoxel(l,c,p);
+void Sculptor::putBox(int x0, int x1, int y0, int y1, int z0, int z1)
+{
+    for (int p = z0; p <= z1; p++)
+    {
+        for (int l = x0; l <= x1; l++)
+        {
+            for (int c = y0; c <= y1; c++)
+            {
+                v[l][c][p].isOn = true;
+                v[l][c][p].r = this->r;
+                v[l][c][p].g = this->g;
+                v[l][c][p].b = this->b;
+                v[l][c][p].a = this->a;
+                fout << "putbox " << x0 << " " << x1 << " " << y0 << " " << y1 << " " << z0 << " " << z1
+                     << " " << this->r << " " << this->g << " " << this->b << " " << this->a << std::endl;
             }
         }
     }
@@ -83,11 +122,16 @@ void Sculptor::putBox(int x0, int x1, int y0, int y1, int z0, int z1) {
 
 // cutBox: remove all voxels on range x0 to x1, y0 to y1 and z0 to z1
 
-void Sculptor::cutBox(int x0, int x1, int y0, int y1, int z0, int z1) {
-    for (int p = z0; p <= z1; p++) {
-        for (int l = x0; l <= x1; l++) {
-            for (int c = y0; c <= y1; c++) {
-                cutVoxel(l,c,p);
+void Sculptor::cutBox(int x0, int x1, int y0, int y1, int z0, int z1)
+{
+    for (int p = z0; p <= z1; p++)
+    {
+        for (int l = x0; l <= x1; l++)
+        {
+            for (int c = y0; c <= y1; c++)
+            {
+                v[l][c][p].isOn = false;
+                fout << "cutbox " << x0 << " " << x1 << " " << y0 << " " << y1 << " " << z0 << " " << z1 << std::endl;
             }
         }
     }
@@ -98,13 +142,17 @@ void Sculptor::cutBox(int x0, int x1, int y0, int y1, int z0, int z1) {
 
 // putSphere: put a sphere whose center is [ xcenter ycenter zcenter ]
 
-void Sculptor::putSphere(int xcenter, int ycenter, int zcenter, int radius) {
+void Sculptor::putSphere(int xcenter, int ycenter, int zcenter, int radius)
+{
 
     float s = xcenter, t = ycenter;
 
-    for (int p = zcenter - radius; p < zcenter + radius; p++) {
-        for (int l = s - radius; l < s + radius; l++) {
-            for (int c = t - radius; c < t + radius; c++) {
+    for (int p = zcenter - radius; p < zcenter + radius; p++)
+    {
+        for (int l = s - radius; l < s + radius; l++)
+        {
+            for (int c = t - radius; c < t + radius; c++)
+            {
 
                 // shifts any voxel to the center
 
@@ -112,8 +160,16 @@ void Sculptor::putSphere(int xcenter, int ycenter, int zcenter, int radius) {
                 float y = c - t;
                 float z = p - zcenter;
 
-                if (x*x + y*y + z*z < radius*radius)
-                    putVoxel(l,c,p);
+                if (x * x + y * y + z * z < radius * radius)
+                {
+                    v[l][c][p].isOn = true;
+                    v[l][c][p].r = this->r;
+                    v[l][c][p].g = this->g;
+                    v[l][c][p].b = this->b;
+                    v[l][c][p].a = this->a;
+                    fout << "putsphere " << xcenter << " " << ycenter << " " << zcenter
+                         << " " << radius << " " << this->r << " " << this->g << " " << this->b << " " << this->a << std::endl;
+                }
             }
         }
     }
@@ -121,20 +177,27 @@ void Sculptor::putSphere(int xcenter, int ycenter, int zcenter, int radius) {
 
 // cutSphere: remove a sphere whose center is [ xcenter ycenter zcenter ]
 
-void Sculptor::cutSphere(int xcenter, int ycenter, int zcenter, int radius) {
+void Sculptor::cutSphere(int xcenter, int ycenter, int zcenter, int radius)
+{
 
     float s = xcenter, t = ycenter;
 
-    for (int p = zcenter - radius; p < zcenter + radius; p++) {
-        for (int l = s - radius; l < s + radius; l++) {
-            for (int c = t - radius; c < t + radius; c++) {
+    for (int p = zcenter - radius; p < zcenter + radius; p++)
+    {
+        for (int l = s - radius; l < s + radius; l++)
+        {
+            for (int c = t - radius; c < t + radius; c++)
+            {
 
                 float x = l - s;
                 float y = c - t;
                 float z = p - zcenter;
 
-                if (x*x + y*y + z*z < radius*radius)
-                    cutVoxel(l,c,p);
+                if (x * x + y * y + z * z < radius * radius)
+                {
+                    v[l][c][p].isOn = false;
+                    fout << "cutsphere " << xcenter << " " << ycenter << " " << zcenter << " " << radius << std::endl;
+                }
             }
         }
     }
@@ -142,20 +205,32 @@ void Sculptor::cutSphere(int xcenter, int ycenter, int zcenter, int radius) {
 
 // putEllipsoid: put an ellipsoid whose center is [ xcenter ycenter zcenter ]
 
-void Sculptor::putEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int ry, int rz) {
+void Sculptor::putEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int ry, int rz)
+{
 
     float s = xcenter, t = ycenter;
 
-    for (int p = zcenter - rz; p < zcenter + rz; p++) {
-        for (int l = s - rx; l < s + rx; l++) {
-            for (int c = t - ry; c < t + ry; c++) {
-
+    for (int p = zcenter - rz; p < zcenter + rz; p++)
+    {
+        for (int l = s - rx; l < s + rx; l++)
+        {
+            for (int c = t - ry; c < t + ry; c++)
+            {
                 float x = (float)(l - s) / rx;
                 float y = (float)(c - t) / ry;
                 float z = (float)(p - zcenter) / rz;
 
-                if (x*x + y*y + z*z <= 1)
-                    putVoxel(l,c,p);
+                if (x * x + y * y + z * z <= 1)
+                {
+                    v[l][c][p].isOn = true;
+                    v[l][c][p].r = this->r;
+                    v[l][c][p].g = this->g;
+                    v[l][c][p].b = this->b;
+                    v[l][c][p].a = this->a;
+                    fout << "putellipsoid " << xcenter << " " << ycenter << " " << zcenter << " "
+                         << rx << " " << ry << " " << rz << " "
+                         << this->r << " " << this->g << " " << this->b << " " << this->a << std::endl;
+                }
             }
         }
     }
@@ -163,20 +238,27 @@ void Sculptor::putEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int r
 
 // putEllipsoid: remove an ellipsoid whose center is [ xcenter ycenter zcenter ]
 
-void Sculptor::cutEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int ry, int rz) {
+void Sculptor::cutEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int ry, int rz)
+{
 
     float s = xcenter, t = ycenter;
 
-    for (int p = zcenter - rz; p < zcenter + rz; p++) {
-        for (int l = s - rx; l < s + rx; l++) {
-            for (int c = t - ry; c < t + ry; c++) {
+    for (int p = zcenter - rz; p < zcenter + rz; p++)
+    {
+        for (int l = s - rx; l < s + rx; l++)
+        {
+            for (int c = t - ry; c < t + ry; c++)
+            {
 
                 float x = (float)(l - s) / rx;
                 float y = (float)(c - t) / ry;
                 float z = (float)(p - zcenter) / rz;
 
-                if (x*x + y*y + z*z <= 1)
-                    cutVoxel(l,c,p);
+                if (x * x + y * y + z * z <= 1)
+                {
+                    v[l][c][p].isOn = true;
+                    fout << "cutellipsoid " << xcenter << " " << ycenter << " " << zcenter << " " << rx << " " << ry << " " << rz << " " << std::endl;
+                }
             }
         }
     }
@@ -184,16 +266,20 @@ void Sculptor::cutEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int r
 
 // writeOFF: exports a OFF file according with the given drawing instructions
 
-void Sculptor::writeOFF(const char* filename) {
+void Sculptor::writeOFF(const char *filename)
+{
 
     unsigned int voxels = 0;
     unsigned int currface = 0;
 
     // Calculate amount of voxels with property isOn = true
 
-    for (int p = 0; p < nz; p++) {
-        for (int l = 0; l < nx; l++) {
-            for (int c = 0; c < ny; c++) {
+    for (int p = 0; p < nz; p++)
+    {
+        for (int l = 0; l < nx; l++)
+        {
+            for (int c = 0; c < ny; c++)
+            {
                 if (v[p][l][c].isOn == true)
                     voxels += 1;
             }
@@ -209,7 +295,8 @@ void Sculptor::writeOFF(const char* filename) {
     std::cout << "log: creating " << filename << std::endl;
     fout.open(filename, std::ios::out);
 
-    if (fout.is_open()) {
+    if (fout.is_open())
+    {
 
         // Header
 
@@ -222,20 +309,24 @@ void Sculptor::writeOFF(const char* filename) {
 
         std::cout << "log: building vertexes coordinates" << std::endl;
 
-		fout << std::fixed; // @enumerate fixed: força a saida como nomenclatura de ponto fixo. Ex: 3.59 -> 3.590000
-		
-        for (int p = 0; p < nz; p++) {
-            for (int l = 0; l < nx; l++) {
-                for (int c = 0; c < ny; c++) {
-                    if (v[p][l][c].isOn == true) {
-                        fout << -0.5 + l << " " <<  0.5 + c << " " << -0.5 + p << std::endl;
+        fout << std::fixed; // @enumerate fixed: força a saida como nomenclatura de ponto fixo. Ex: 3.59 -> 3.590000
+
+        for (int p = 0; p < nz; p++)
+        {
+            for (int l = 0; l < nx; l++)
+            {
+                for (int c = 0; c < ny; c++)
+                {
+                    if (v[p][l][c].isOn == true)
+                    {
+                        fout << -0.5 + l << " " << 0.5 + c << " " << -0.5 + p << std::endl;
                         fout << -0.5 + l << " " << -0.5 + c << " " << -0.5 + p << std::endl;
-                        fout <<  0.5 + l << " " << -0.5 + c << " " << -0.5 + p << std::endl;
-                        fout <<  0.5 + l << " " <<  0.5 + c << " " << -0.5 + p << std::endl;
-                        fout << -0.5 + l << " " <<  0.5 + c << " " <<  0.5 + p << std::endl;
-                        fout << -0.5 + l << " " << -0.5 + c << " " <<  0.5 + p << std::endl;
-                        fout <<  0.5 + l << " " << -0.5 + c << " " <<  0.5 + p << std::endl;
-                        fout <<  0.5 + l << " " <<  0.5 + c << " " <<  0.5 + p << std::endl;
+                        fout << 0.5 + l << " " << -0.5 + c << " " << -0.5 + p << std::endl;
+                        fout << 0.5 + l << " " << 0.5 + c << " " << -0.5 + p << std::endl;
+                        fout << -0.5 + l << " " << 0.5 + c << " " << 0.5 + p << std::endl;
+                        fout << -0.5 + l << " " << -0.5 + c << " " << 0.5 + p << std::endl;
+                        fout << 0.5 + l << " " << -0.5 + c << " " << 0.5 + p << std::endl;
+                        fout << 0.5 + l << " " << 0.5 + c << " " << 0.5 + p << std::endl;
                     }
                 }
             }
@@ -245,11 +336,15 @@ void Sculptor::writeOFF(const char* filename) {
 
         std::cout << "log: building faces specifications" << std::endl;
 
-        for (int p = 0; p < nz; p++) {
-            for (int l = 0; l < nx; l++) {
-                for (int c = 0; c < ny; c++) {
+        for (int p = 0; p < nz; p++)
+        {
+            for (int l = 0; l < nx; l++)
+            {
+                for (int c = 0; c < ny; c++)
+                {
 
-                    if (v[p][l][c].isOn == true) {
+                    if (v[p][l][c].isOn == true)
+                    {
                         // specicifies face whose vertexes have indexes [ a b c d ]
 
                         fout << 4 << " " << 0 + currface << " " << 3 + currface << " " << 2 + currface << " " << 1 + currface << " " << v[p][l][c].r << " " << v[p][l][c].g << " " << v[p][l][c].b << " " << v[p][l][c].a << std::endl;
@@ -272,4 +367,3 @@ void Sculptor::writeOFF(const char* filename) {
         fout.close();
     }
 }
-

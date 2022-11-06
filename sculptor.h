@@ -1,3 +1,4 @@
+#include <fstream>
 #include "voxel.h"
 
 #ifndef SCULPTOR_H
@@ -13,6 +14,7 @@ class Sculptor {
       Voxel ***v; // 3D matrix
       int nx,ny,nz; // Dimensions
       float r,g,b,a; // Current drawing color
+      std::ofstream fout;
     public:
 
       /**
