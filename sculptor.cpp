@@ -14,7 +14,7 @@ Sculptor::Sculptor(int _nx, int _ny, int _nz)
     nz = _nz;
 
     //
-    
+
     fout.open("assets/instrucoes.txt");
     fout << "dim " << _nx << " " << _ny << " " << _nz << std::endl;
 
@@ -74,8 +74,7 @@ void Sculptor::putVoxel(int x, int y, int z)
         v[x][y][z].g = g;
         v[x][y][z].b = b;
         v[x][y][z].a = a;
-        fout << "putvoxel " << x << " " << y << " " << z << " "
-             << this->r << " " << this->g << " " << this->b << " " << this->a << std::endl;
+        fout << "putvoxel " << x << " " << y << " " << z << " " << this->r << " " << this->g << " " << this->b << " " << this->a << std::endl;
     }
     else
     {
@@ -102,6 +101,8 @@ void Sculptor::cutVoxel(int x, int y, int z)
 
 void Sculptor::putBox(int x0, int x1, int y0, int y1, int z0, int z1)
 {
+    fout << "putbox " << x0 << " " << x1 << " " << y0 << " " << y1 << " " << z0 << " " << z1 << " " << this->r << " " << this->g << " " << this->b << " " << this->a << std::endl;
+
     for (int p = z0; p <= z1; p++)
     {
         for (int l = x0; l <= x1; l++)
@@ -113,8 +114,6 @@ void Sculptor::putBox(int x0, int x1, int y0, int y1, int z0, int z1)
                 v[l][c][p].g = this->g;
                 v[l][c][p].b = this->b;
                 v[l][c][p].a = this->a;
-                fout << "putbox " << x0 << " " << x1 << " " << y0 << " " << y1 << " " << z0 << " " << z1
-                     << " " << this->r << " " << this->g << " " << this->b << " " << this->a << std::endl;
             }
         }
     }
@@ -124,6 +123,8 @@ void Sculptor::putBox(int x0, int x1, int y0, int y1, int z0, int z1)
 
 void Sculptor::cutBox(int x0, int x1, int y0, int y1, int z0, int z1)
 {
+    fout << "cutbox " << x0 << " " << x1 << " " << y0 << " " << y1 << " " << z0 << " " << z1 << std::endl;
+
     for (int p = z0; p <= z1; p++)
     {
         for (int l = x0; l <= x1; l++)
@@ -131,7 +132,6 @@ void Sculptor::cutBox(int x0, int x1, int y0, int y1, int z0, int z1)
             for (int c = y0; c <= y1; c++)
             {
                 v[l][c][p].isOn = false;
-                fout << "cutbox " << x0 << " " << x1 << " " << y0 << " " << y1 << " " << z0 << " " << z1 << std::endl;
             }
         }
     }
@@ -144,6 +144,7 @@ void Sculptor::cutBox(int x0, int x1, int y0, int y1, int z0, int z1)
 
 void Sculptor::putSphere(int xcenter, int ycenter, int zcenter, int radius)
 {
+    fout << "putsphere " << xcenter << " " << ycenter << " " << zcenter << " " << radius << " " << this->r << " " << this->g << " " << this->b << " " << this->a << std::endl;
 
     float s = xcenter, t = ycenter;
 
@@ -167,8 +168,6 @@ void Sculptor::putSphere(int xcenter, int ycenter, int zcenter, int radius)
                     v[l][c][p].g = this->g;
                     v[l][c][p].b = this->b;
                     v[l][c][p].a = this->a;
-                    fout << "putsphere " << xcenter << " " << ycenter << " " << zcenter
-                         << " " << radius << " " << this->r << " " << this->g << " " << this->b << " " << this->a << std::endl;
                 }
             }
         }
@@ -181,6 +180,8 @@ void Sculptor::cutSphere(int xcenter, int ycenter, int zcenter, int radius)
 {
 
     float s = xcenter, t = ycenter;
+
+    fout << "cutsphere " << xcenter << " " << ycenter << " " << zcenter << " " << radius << std::endl;
 
     for (int p = zcenter - radius; p < zcenter + radius; p++)
     {
@@ -196,7 +197,6 @@ void Sculptor::cutSphere(int xcenter, int ycenter, int zcenter, int radius)
                 if (x * x + y * y + z * z < radius * radius)
                 {
                     v[l][c][p].isOn = false;
-                    fout << "cutsphere " << xcenter << " " << ycenter << " " << zcenter << " " << radius << std::endl;
                 }
             }
         }
@@ -207,8 +207,9 @@ void Sculptor::cutSphere(int xcenter, int ycenter, int zcenter, int radius)
 
 void Sculptor::putEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int ry, int rz)
 {
-
     float s = xcenter, t = ycenter;
+
+    fout << "putellipsoid " << xcenter << " " << ycenter << " " << zcenter << " " << rx << " " << ry << " " << rz << " " << this->r << " " << this->g << " " << this->b << " " << this->a << std::endl;
 
     for (int p = zcenter - rz; p < zcenter + rz; p++)
     {
@@ -227,9 +228,6 @@ void Sculptor::putEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int r
                     v[l][c][p].g = this->g;
                     v[l][c][p].b = this->b;
                     v[l][c][p].a = this->a;
-                    fout << "putellipsoid " << xcenter << " " << ycenter << " " << zcenter << " "
-                         << rx << " " << ry << " " << rz << " "
-                         << this->r << " " << this->g << " " << this->b << " " << this->a << std::endl;
                 }
             }
         }
@@ -242,6 +240,8 @@ void Sculptor::cutEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int r
 {
 
     float s = xcenter, t = ycenter;
+
+    fout << "cutellipsoid " << xcenter << " " << ycenter << " " << zcenter << " " << rx << " " << ry << " " << rz << " " << std::endl;
 
     for (int p = zcenter - rz; p < zcenter + rz; p++)
     {
@@ -257,7 +257,6 @@ void Sculptor::cutEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int r
                 if (x * x + y * y + z * z <= 1)
                 {
                     v[l][c][p].isOn = true;
-                    fout << "cutellipsoid " << xcenter << " " << ycenter << " " << zcenter << " " << rx << " " << ry << " " << rz << " " << std::endl;
                 }
             }
         }

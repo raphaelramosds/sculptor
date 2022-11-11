@@ -113,7 +113,7 @@ int main()
 
     // Eyes
 
-    figura.setColor(1.0, 1.0, 1.0, 1.0);
+    figura.setColor(0.99, 0.99, 0.99, 1.0);
     figura.putSphere(20,18,25,2);
     figura.cutSphere(20,18,25,1);
     figura.putSphere(20,23,25,2);
@@ -153,7 +153,7 @@ int main()
 
     // Export off
 
-    figura.writeOFF("keven.off");
+    figura.writeOFF("assets/keven.off");
 
     return 0;
 }
