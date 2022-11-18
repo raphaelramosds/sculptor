@@ -146,19 +146,17 @@ void Sculptor::putSphere(int xcenter, int ycenter, int zcenter, int radius)
 {
     fout << "putsphere " << xcenter << " " << ycenter << " " << zcenter << " " << radius << " " << this->r << " " << this->g << " " << this->b << " " << this->a << std::endl;
 
-    float s = xcenter, t = ycenter;
-
     for (int p = zcenter - radius; p < zcenter + radius; p++)
     {
-        for (int l = s - radius; l < s + radius; l++)
+        for (int l = xcenter - radius; l < xcenter + radius; l++)
         {
-            for (int c = t - radius; c < t + radius; c++)
+            for (int c = ycenter - radius; c < ycenter + radius; c++)
             {
 
                 // shifts any voxel to the center
 
-                float x = l - s;
-                float y = c - t;
+                float x = l - xcenter;
+                float y = c - ycenter;
                 float z = p - zcenter;
 
                 if (x * x + y * y + z * z < radius * radius)
@@ -178,20 +176,17 @@ void Sculptor::putSphere(int xcenter, int ycenter, int zcenter, int radius)
 
 void Sculptor::cutSphere(int xcenter, int ycenter, int zcenter, int radius)
 {
-
-    float s = xcenter, t = ycenter;
-
     fout << "cutsphere " << xcenter << " " << ycenter << " " << zcenter << " " << radius << std::endl;
 
     for (int p = zcenter - radius; p < zcenter + radius; p++)
     {
-        for (int l = s - radius; l < s + radius; l++)
+        for (int l = xcenter - radius; l < xcenter + radius; l++)
         {
-            for (int c = t - radius; c < t + radius; c++)
+            for (int c = ycenter - radius; c < ycenter + radius; c++)
             {
 
-                float x = l - s;
-                float y = c - t;
+                float x = l - xcenter;
+                float y = c - ycenter;
                 float z = p - zcenter;
 
                 if (x * x + y * y + z * z < radius * radius)
@@ -207,21 +202,19 @@ void Sculptor::cutSphere(int xcenter, int ycenter, int zcenter, int radius)
 
 void Sculptor::putEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int ry, int rz)
 {
-    float s = xcenter, t = ycenter;
-
     fout << "putellipsoid " << xcenter << " " << ycenter << " " << zcenter << " " << rx << " " << ry << " " << rz << " " << this->r << " " << this->g << " " << this->b << " " << this->a << std::endl;
 
     for (int p = zcenter - rz; p < zcenter + rz; p++)
     {
-        for (int l = s - rx; l < s + rx; l++)
+        for (int l = xcenter - rx; l < xcenter + rx; l++)
         {
-            for (int c = t - ry; c < t + ry; c++)
+            for (int c = ycenter - ry; c < ycenter + ry; c++)
             {
-                float x = (float)(l - s) / rx;
-                float y = (float)(c - t) / ry;
+                float x = (float)(l - xcenter) / rx;
+                float y = (float)(c - ycenter) / ry;
                 float z = (float)(p - zcenter) / rz;
 
-                if (x * x + y * y + z * z <= 1)
+                if (x * x + y * y + z * z < 1)
                 {
                     v[l][c][p].isOn = true;
                     v[l][c][p].r = this->r;
@@ -239,24 +232,22 @@ void Sculptor::putEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int r
 void Sculptor::cutEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int ry, int rz)
 {
 
-    float s = xcenter, t = ycenter;
-
     fout << "cutellipsoid " << xcenter << " " << ycenter << " " << zcenter << " " << rx << " " << ry << " " << rz << " " << std::endl;
 
     for (int p = zcenter - rz; p < zcenter + rz; p++)
     {
-        for (int l = s - rx; l < s + rx; l++)
+        for (int l = xcenter - rx; l < xcenter + rx; l++)
         {
-            for (int c = t - ry; c < t + ry; c++)
+            for (int c = ycenter - ry; c < ycenter + ry; c++)
             {
 
-                float x = (float)(l - s) / rx;
-                float y = (float)(c - t) / ry;
+                float x = (float)(l - xcenter) / rx;
+                float y = (float)(c - ycenter) / ry;
                 float z = (float)(p - zcenter) / rz;
 
-                if (x * x + y * y + z * z <= 1)
+                if (x * x + y * y + z * z < 1)
                 {
-                    v[l][c][p].isOn = true;
+                    v[l][c][p].isOn = false;
                 }
             }
         }
