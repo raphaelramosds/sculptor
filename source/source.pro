@@ -15,7 +15,8 @@ SOURCES += \
 
 HEADERS += \
     canvasplane.h \
-    mainwindow.h
+    mainwindow.h \
+    voxel.h
 
 FORMS += \
     mainwindow.ui
