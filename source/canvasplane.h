@@ -1,14 +1,11 @@
 #ifndef CANVASPLANE_H
 #define CANVASPLANE_H
 
-#include "voxel.h"
+#include "Voxel.h"
 
 #include <vector>
 
 #include <QWidget>
-#include <QPainter>
-#include <QBrush>
-#include <QPen>
 
 class CanvasPlane : public QWidget
 {
@@ -22,15 +19,26 @@ private:
      * */
 
     std::vector<std::vector<Voxel>> p;
+
+    // Tamanho do plano
+
     unsigned int dimh;
     unsigned int dimv;
 
+    // Altura e largura dos pixels do plano
+
+    unsigned int pixelh;
+    unsigned int pixelw;
+
+    // Coordenadas horizontal e vertical atuais
+
+    int currX;
+    int currY;
+
 public:
     explicit CanvasPlane(QWidget *parent = nullptr);
+    void mousePressEvent(QMouseEvent *event);
     void paintEvent(QPaintEvent *event);
-
-signals:
-
 };
 
 #endif // CANVASPLANE_H
