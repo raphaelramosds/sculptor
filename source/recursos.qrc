@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/icones">
+        <file>recursos/box.svg</file>
+        <file>recursos/elipsoide.svg</file>
+        <file>recursos/esfera.svg</file>
+        <file>recursos/setcolor.svg</file>
+        <file>recursos/voxel.svg</file>
+    </qresource>
+</RCC>

@@ -13,12 +13,12 @@ CanvasPlane::CanvasPlane(QWidget *parent)
 {
     // Dimensão horizontal e vertical da matriz
 
-    dimh = 41;
-    dimv = 41;
+    dimh = 51;
+    dimv = 51;
 
     // Fatores de escala para X e Y na malha
 
-    unsigned int scalex = height()/3;
+    unsigned int scalex = height()/2;
     unsigned int scaley = scalex * 4;
 
     // Altura e largura dos pixels do plano
