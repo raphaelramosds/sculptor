@@ -22,13 +22,13 @@ private:
 
     // Tamanho do plano
 
-    unsigned int dimh;
-    unsigned int dimv;
+    int dimh;
+    int dimv;
 
     // Altura e largura dos pixels do plano
 
-    unsigned int pixelh;
-    unsigned int pixelw;
+    int pixelh;
+    int pixelw;
 
     // Coordenadas horizontal e vertical atuais
 

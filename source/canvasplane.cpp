@@ -1,5 +1,4 @@
 #include "canvasplane.h"
-
 #include <QWidget>
 #include <QPainter>
 #include <QBrush>
@@ -13,18 +12,8 @@ CanvasPlane::CanvasPlane(QWidget *parent)
 {
     // Dimensão horizontal e vertical da matriz
 
-    dimh = 51;
-    dimv = 51;
-
-    // Fatores de escala para X e Y na malha
-
-    unsigned int scalex = height()/2;
-    unsigned int scaley = scalex * 4;
-
-    // Altura e largura dos pixels do plano
-
-    pixelh = scaley * height()/dimh;
-    pixelw = scalex * width()/dimv;
+    dimh = 31;
+    dimv = 31;
 }
 
 void CanvasPlane::mousePressEvent(QMouseEvent *event)
@@ -44,6 +33,11 @@ void CanvasPlane::paintEvent(QPaintEvent *event)
     QBrush brush;
     QPen pen;
 
+    // Altura e largura dos pixels do plano
+
+    pixelh = height()/dimh;
+    pixelw = width()/dimv;
+
     // Canvas border and fill
 
     brush.setColor(white);
@@ -58,9 +52,11 @@ void CanvasPlane::paintEvent(QPaintEvent *event)
 
     // Canvas' cols and lines
 
-    for (unsigned int c = 1; c < dimh; c++)
+    for (int c = 0; c < dimh; c++) {
         painter.drawLine(c*pixelw, 0, c*pixelw, height());
+    }
 
-    for (unsigned int l = 1; l < dimv; l++)
+    for (int l = 0; l < dimv; l++) {
         painter.drawLine(0, l*pixelh, width(), l*pixelh);
+    }
 }
