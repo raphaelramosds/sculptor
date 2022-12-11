@@ -22,6 +22,22 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
+     <widget class="CanvasPlane" name="widget" native="true">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="autoFillBackground">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item>
      <widget class="QGroupBox" name="groupBox">
       <property name="maximumSize">
        <size>
@@ -63,22 +79,6 @@
       </layout>
      </widget>
     </item>
-    <item>
-     <widget class="CanvasPlane" name="widget" native="true">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>0</height>
-       </size>
-      </property>
-      <property name="autoFillBackground">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -94,9 +94,9 @@
     <property name="title">
      <string>Arquivo</string>
     </property>
-    <addaction name="actionNovo"/>
-    <addaction name="actionExportar"/>
-    <addaction name="actionSair"/>
+    <addaction name="actionNewPlane"/>
+    <addaction name="actionExportOFF"/>
+    <addaction name="actionQuit"/>
    </widget>
    <addaction name="menuArquivo"/>
   </widget>
@@ -118,17 +118,17 @@
    <addaction name="actiondrawEllipsoid"/>
    <addaction name="actionsetColor"/>
   </widget>
-  <action name="actionExportar">
+  <action name="actionExportOFF">
    <property name="text">
     <string>Exportar</string>
    </property>
   </action>
-  <action name="actionSair">
+  <action name="actionQuit">
    <property name="text">
     <string>Sair</string>
    </property>
   </action>
-  <action name="actionNovo">
+  <action name="actionNewPlane">
    <property name="text">
     <string>Novo</string>
    </property>

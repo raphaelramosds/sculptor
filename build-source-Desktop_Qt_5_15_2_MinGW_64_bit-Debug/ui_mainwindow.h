@@ -31,9 +31,9 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow
 {
 public:
-    QAction *actionExportar;
-    QAction *actionSair;
-    QAction *actionNovo;
+    QAction *actionExportOFF;
+    QAction *actionQuit;
+    QAction *actionNewPlane;
     QAction *actiondrawVoxel;
     QAction *actiondrawBox;
     QAction *actiondrawSphere;
@@ -41,13 +41,13 @@ public:
     QAction *actionsetColor;
     QWidget *centralwidget;
     QVBoxLayout *verticalLayout_2;
+    CanvasPlane *widget;
     QGroupBox *groupBox;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout;
     QSlider *horizontalSlider;
     QLCDNumber *lcdNumber;
     QSpacerItem *horizontalSpacer;
-    CanvasPlane *widget;
     QMenuBar *menubar;
     QMenu *menuArquivo;
     QStatusBar *statusbar;
@@ -59,12 +59,12 @@ public:
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
         MainWindow->resize(434, 354);
         MainWindow->setMinimumSize(QSize(0, 0));
-        actionExportar = new QAction(MainWindow);
-        actionExportar->setObjectName(QString::fromUtf8("actionExportar"));
-        actionSair = new QAction(MainWindow);
-        actionSair->setObjectName(QString::fromUtf8("actionSair"));
-        actionNovo = new QAction(MainWindow);
-        actionNovo->setObjectName(QString::fromUtf8("actionNovo"));
+        actionExportOFF = new QAction(MainWindow);
+        actionExportOFF->setObjectName(QString::fromUtf8("actionExportOFF"));
+        actionQuit = new QAction(MainWindow);
+        actionQuit->setObjectName(QString::fromUtf8("actionQuit"));
+        actionNewPlane = new QAction(MainWindow);
+        actionNewPlane->setObjectName(QString::fromUtf8("actionNewPlane"));
         actiondrawVoxel = new QAction(MainWindow);
         actiondrawVoxel->setObjectName(QString::fromUtf8("actiondrawVoxel"));
         QIcon icon;
@@ -94,6 +94,14 @@ public:
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         verticalLayout_2 = new QVBoxLayout(centralwidget);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        widget = new CanvasPlane(centralwidget);
+        widget->setObjectName(QString::fromUtf8("widget"));
+        widget->setEnabled(true);
+        widget->setMinimumSize(QSize(0, 0));
+        widget->setAutoFillBackground(true);
+
+        verticalLayout_2->addWidget(widget);
+
         groupBox = new QGroupBox(centralwidget);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
         groupBox->setMaximumSize(QSize(16777215, 60));
@@ -122,14 +130,6 @@ public:
 
         verticalLayout_2->addWidget(groupBox);
 
-        widget = new CanvasPlane(centralwidget);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setEnabled(true);
-        widget->setMinimumSize(QSize(0, 0));
-        widget->setAutoFillBackground(true);
-
-        verticalLayout_2->addWidget(widget);
-
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
@@ -145,9 +145,9 @@ public:
         MainWindow->addToolBar(Qt::TopToolBarArea, toolBar);
 
         menubar->addAction(menuArquivo->menuAction());
-        menuArquivo->addAction(actionNovo);
-        menuArquivo->addAction(actionExportar);
-        menuArquivo->addAction(actionSair);
+        menuArquivo->addAction(actionNewPlane);
+        menuArquivo->addAction(actionExportOFF);
+        menuArquivo->addAction(actionQuit);
         toolBar->addSeparator();
         toolBar->addAction(actiondrawVoxel);
         toolBar->addAction(actiondrawBox);
@@ -163,9 +163,9 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-        actionExportar->setText(QCoreApplication::translate("MainWindow", "Exportar", nullptr));
-        actionSair->setText(QCoreApplication::translate("MainWindow", "Sair", nullptr));
-        actionNovo->setText(QCoreApplication::translate("MainWindow", "Novo", nullptr));
+        actionExportOFF->setText(QCoreApplication::translate("MainWindow", "Exportar", nullptr));
+        actionQuit->setText(QCoreApplication::translate("MainWindow", "Sair", nullptr));
+        actionNewPlane->setText(QCoreApplication::translate("MainWindow", "Novo", nullptr));
         actiondrawVoxel->setText(QCoreApplication::translate("MainWindow", "drawVoxel", nullptr));
         actiondrawBox->setText(QCoreApplication::translate("MainWindow", "drawBox", nullptr));
         actiondrawSphere->setText(QCoreApplication::translate("MainWindow", "drawSphere", nullptr));
