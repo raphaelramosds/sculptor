@@ -142,7 +142,9 @@ public:
         MainWindow->setStatusBar(statusbar);
         toolBar = new QToolBar(MainWindow);
         toolBar->setObjectName(QString::fromUtf8("toolBar"));
-        MainWindow->addToolBar(Qt::TopToolBarArea, toolBar);
+        toolBar->setMovable(false);
+        toolBar->setIconSize(QSize(64, 64));
+        MainWindow->addToolBar(Qt::LeftToolBarArea, toolBar);
 
         menubar->addAction(menuArquivo->menuAction());
         menuArquivo->addAction(actionNewPlane);
