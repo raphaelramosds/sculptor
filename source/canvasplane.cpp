@@ -26,7 +26,7 @@ void CanvasPlane::mousePressEvent(QMouseEvent *event)
 
 void CanvasPlane::paintEvent(QPaintEvent *event)
 {
-    QColor white = QColor(239,241,237);
+    QColor white = QColor(255,255,255);
     QColor gray = QColor(220,220,220);
 
     QPainter painter(this);
