@@ -52,11 +52,9 @@ void CanvasPlane::paintEvent(QPaintEvent *event)
 
     // Canvas' cols and lines
 
-    for (int c = 0; c < dimh; c++) {
+    for (int c = 0; c < dimh; c++)
         painter.drawLine(c*pixelw, 0, c*pixelw, height());
-    }
 
-    for (int l = 0; l < dimv; l++) {
+    for (int l = 0; l < dimv; l++)
         painter.drawLine(0, l*pixelh, width(), l*pixelh);
-    }
 }
