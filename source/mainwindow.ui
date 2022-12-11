@@ -77,7 +77,7 @@
               <property name="title">
                <string>Largura</string>
               </property>
-              <widget class="QWidget" name="">
+              <widget class="QWidget" name="layoutWidget">
                <property name="geometry">
                 <rect>
                  <x>11</x>
@@ -118,7 +118,7 @@
               <property name="title">
                <string>Altura</string>
               </property>
-              <widget class="QWidget" name="">
+              <widget class="QWidget" name="layoutWidget">
                <property name="geometry">
                 <rect>
                  <x>11</x>
@@ -159,7 +159,7 @@
               <property name="title">
                <string>Profundidade</string>
               </property>
-              <widget class="QWidget" name="">
+              <widget class="QWidget" name="layoutWidget">
                <property name="geometry">
                 <rect>
                  <x>11</x>
@@ -204,7 +204,7 @@
          <attribute name="title">
           <string>Esfera</string>
          </attribute>
-         <widget class="QWidget" name="">
+         <widget class="QWidget" name="layoutWidget">
           <property name="geometry">
            <rect>
             <x>10</x>
@@ -329,7 +329,7 @@
          <attribute name="title">
           <string>Elipsóide</string>
          </attribute>
-         <widget class="QWidget" name="">
+         <widget class="QWidget" name="layoutWidget">
           <property name="geometry">
            <rect>
             <x>10</x>
