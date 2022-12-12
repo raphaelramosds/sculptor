@@ -12,15 +12,20 @@ CanvasPlane::CanvasPlane(QWidget *parent)
 {
     // Dimensão horizontal e vertical da matriz
 
-    dimh = 31;
+    dimh = 31; // obs: put '19x19'
     dimv = 31;
 }
 
 void CanvasPlane::mousePressEvent(QMouseEvent *event)
 {
+
+
+    qDebug() << width() << " " << height();
+
+
     currX = event->x()/pixelw;
     currY = event->y()/pixelh;
-
+    emit posicao(currX,currY);
     qDebug() << currX << " " << currY;
 }
 
@@ -35,8 +40,12 @@ void CanvasPlane::paintEvent(QPaintEvent *event)
 
     // Altura e largura dos pixels do plano
 
-    pixelh = height()/dimh;
-    pixelw = width()/dimv;
+    pixelh = (height()/dimh);
+    pixelw = (width()/dimv);
+
+    // ternary conditional operator
+
+    (pixelh>pixelw) ? fat = pixelh : fat = pixelw; // quare matrix = 'smaller dim'
 
     // Canvas border and fill
 
@@ -44,7 +53,7 @@ void CanvasPlane::paintEvent(QPaintEvent *event)
     brush.setStyle(Qt::SolidPattern);
 
     pen.setColor(gray);
-    pen.setWidth(2);
+    pen.setWidth(2); // default = '2'
 
     painter.setBrush(brush);
     painter.setPen(pen);
@@ -52,9 +61,9 @@ void CanvasPlane::paintEvent(QPaintEvent *event)
 
     // Canvas' cols and lines
 
-    for (int c = 0; c < dimh; c++)
-        painter.drawLine(c*pixelw, 0, c*pixelw, height());
-
-    for (int l = 0; l < dimv; l++)
-        painter.drawLine(0, l*pixelh, width(), l*pixelh);
+    for(unsigned int l=0; l < dimv; l++){
+        for(unsigned int c=0; c < dimh; c++){
+            painter.drawRect(l*pixelh, c*pixelw, pixelh , pixelw);
+        }
+    }
 }

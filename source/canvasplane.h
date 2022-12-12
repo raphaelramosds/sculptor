@@ -29,6 +29,7 @@ private:
 
     int pixelh;
     int pixelw;
+    int fat;
 
     // Coordenadas horizontal e vertical atuais
 
@@ -39,6 +40,8 @@ public:
     explicit CanvasPlane(QWidget *parent = nullptr);
     void mousePressEvent(QMouseEvent *event);
     void paintEvent(QPaintEvent *event);
+signals:
+    void posicao(int, int);
 };
 
 #endif // CANVASPLANE_H
