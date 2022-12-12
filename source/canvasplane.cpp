@@ -12,14 +12,17 @@ CanvasPlane::CanvasPlane(QWidget *parent)
 {
     // Dimensão horizontal e vertical da matriz
 
-    dimh = 29; // obs: put '19x19'
-    dimv = 29;
+    dimh = 31; // obs: put '19x19'
+    dimv = 31;
 }
 
 void CanvasPlane::mousePressEvent(QMouseEvent *event)
 {
-    currX = event->x()/width();
-    currY = event->y()/height();
+
+    qDebug() << width() << " " << height();
+
+    currX = event->x()/pixelw;
+    currY = event->y()/pixelh;
 
     qDebug() << currX << " " << currY;
 }
@@ -56,11 +59,9 @@ void CanvasPlane::paintEvent(QPaintEvent *event)
 
     // Canvas' cols and lines
 
-    for(unsigned int l=0;l<height();l++){
-
-        for(unsigned int c=0;c<width();c++){
+    for(unsigned int l=0; l < dimv; l++){
+        for(unsigned int c=0; c < dimh; c++){
             painter.drawRect(l*pixelh, c*pixelw, pixelh , pixelw);
-
         }
     }
 }
