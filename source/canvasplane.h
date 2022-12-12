@@ -29,6 +29,7 @@ private:
 
     int pixelh;
     int pixelw;
+    int fat;
 
     // Coordenadas horizontal e vertical atuais
 
