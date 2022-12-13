@@ -93,13 +93,21 @@
          </size>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="boxTab">
          <attribute name="title">
           <string>Caixa</string>
          </attribute>
-         <widget class="QWidget" name="">
+         <widget class="QWidget" name="layoutWidget">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>93</width>
+            <height>222</height>
+           </rect>
+          </property>
           <layout class="QVBoxLayout" name="verticalLayout_3">
            <property name="spacing">
             <number>0</number>
@@ -539,7 +547,7 @@
   </action>
   <action name="actionsetColor">
    <property name="icon">
-    <iconset resource="recursos.qrc">
+    <iconset>
      <normaloff>:/icones/recursos/setcolor.svg</normaloff>:/icones/recursos/setcolor.svg</iconset>
    </property>
    <property name="text">
