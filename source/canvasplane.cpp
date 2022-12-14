@@ -1,4 +1,5 @@
 #include "canvasplane.h"
+
 #include <QWidget>
 #include <QPainter>
 #include <QBrush>
@@ -12,16 +13,14 @@ CanvasPlane::CanvasPlane(QWidget *parent)
 {
     // Dimensão horizontal e vertical da matriz
 
-    dimh = 31; // obs: put '19x19'
-    dimv = 31;
+    dimh = 51; // obs: put '19x19'
+    dimv = 51;
+
 }
 
 void CanvasPlane::mousePressEvent(QMouseEvent *event)
 {
-
-
     qDebug() << width() << " " << height();
-
 
     currX = event->x()/pixelw;
     currY = event->y()/pixelh;
@@ -61,9 +60,7 @@ void CanvasPlane::paintEvent(QPaintEvent *event)
 
     // Canvas' cols and lines
 
-    for(unsigned int l=0; l < dimv; l++){
-        for(unsigned int c=0; c < dimh; c++){
+    for(int l=0; l < dimv; l++)
+        for(int c=0; c < dimh; c++)
             painter.drawRect(l*pixelh, c*pixelw, pixelh , pixelw);
-        }
-    }
 }

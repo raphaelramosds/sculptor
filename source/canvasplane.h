@@ -2,7 +2,6 @@
 #define CANVASPLANE_H
 
 #include "Voxel.h"
-
 #include <vector>
 
 #include <QWidget>

@@ -11,11 +11,13 @@ CONFIG += c++17
 SOURCES += \
     canvasplane.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    sculptor.cpp
 
 HEADERS += \
     canvasplane.h \
     mainwindow.h \
+    sculptor.h \
     voxel.h
 
 FORMS += \
