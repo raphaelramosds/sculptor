@@ -12,8 +12,8 @@ CanvasPlane::CanvasPlane(QWidget *parent)
 {
     // Dimensão horizontal e vertical da matriz
 
-    dimh = 51; // obs: put '19x19'
-    dimv = 51;
+    dimh = 41; // obs: put '19x19'
+    dimv = 31;
 }
 
 void CanvasPlane::mousePressEvent(QMouseEvent *event)
