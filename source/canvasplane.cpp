@@ -11,11 +11,7 @@
 CanvasPlane::CanvasPlane(QWidget *parent)
     : QWidget{parent}
 {
-    // Dimensão horizontal e vertical da matriz
-
-    dimh = 51; // obs: put '19x19'
-    dimv = 51;
-
+    dimh = dimv = dimz = 31;
 }
 
 void CanvasPlane::mousePressEvent(QMouseEvent *event)
@@ -24,7 +20,9 @@ void CanvasPlane::mousePressEvent(QMouseEvent *event)
 
     currX = event->x()/pixelw;
     currY = event->y()/pixelh;
+
     emit posicao(currX,currY);
+
     qDebug() << currX << " " << currY;
 }
 
@@ -37,12 +35,10 @@ void CanvasPlane::paintEvent(QPaintEvent *event)
     QBrush brush;
     QPen pen;
 
-    // Altura e largura dos pixels do plano
+    // Plane height and width
 
     pixelh = (height()/dimh);
     pixelw = (width()/dimv);
-
-    // ternary conditional operator
 
     (pixelh>pixelw) ? fat = pixelh : fat = pixelw; // quare matrix = 'smaller dim'
 
@@ -60,7 +56,31 @@ void CanvasPlane::paintEvent(QPaintEvent *event)
 
     // Canvas' cols and lines
 
-    for(int l=0; l < dimv; l++)
-        for(int c=0; c < dimh; c++)
+    for(int l=0; l < dimh; l++)
+    {
+        for(int c=0; c < dimv; c++)
+        {
             painter.drawRect(l*pixelh, c*pixelw, pixelh , pixelw);
+        }
+    }
+}
+
+int CanvasPlane::getDimH()
+{
+    return dimh;
+}
+
+int CanvasPlane::getDimV()
+{
+    return dimv;
+}
+
+int CanvasPlane::getDimZ()
+{
+    return dimz;
+}
+
+void CanvasPlane::loadPlane(std::vector<std::vector<Voxel> > plane)
+{
+    p = plane;
 }
