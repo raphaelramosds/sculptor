@@ -12,11 +12,13 @@ CanvasPlane::CanvasPlane(QWidget *parent)
     : QWidget{parent}
 {
     dimh = dimv = dimz = 40;
+    setMouseTracking(true);
 }
 
 void CanvasPlane::mousePressEvent(QMouseEvent *event)
 {
-    qDebug() << width() << " " << height();
+    if (event->button() == Qt::RightButton) rPressed = true;
+    if (event->button() == Qt::LeftButton) lPressed = true;
 
     currX = event->x()/pixelw;
     currY = event->y()/pixelh;
@@ -24,6 +26,30 @@ void CanvasPlane::mousePressEvent(QMouseEvent *event)
     emit trigCurrPosition(currX,currY);
 
     qDebug() << currX << " " << currY;
+}
+
+void CanvasPlane::mouseMoveEvent(QMouseEvent *event)
+{
+    if (rPressed || lPressed)
+    {
+        currX = event->x()/pixelw;
+        currY = event->y()/pixelh;
+
+        emit trigCurrPosition(currX,currY);
+
+        qDebug() << currX << " " << currY;
+    }
+}
+
+void CanvasPlane::mouseReleaseEvent(QMouseEvent *event)
+{
+    // Left button released or not
+
+    if (lPressed) lPressed = false;
+
+    // Right button released or not
+
+    if (rPressed) rPressed = false;
 }
 
 void CanvasPlane::paintEvent(QPaintEvent *event)

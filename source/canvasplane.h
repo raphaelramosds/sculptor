@@ -42,9 +42,16 @@ private:
     int currX;
     int currY;
 
+    bool rPressed;
+    bool lPressed;
+
 public:
+
     explicit CanvasPlane(QWidget *parent = nullptr);
+
     void mousePressEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);
     void paintEvent(QPaintEvent *event);
 
     int getDimH();
