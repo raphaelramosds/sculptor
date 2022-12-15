@@ -9,7 +9,6 @@
 
 Sculptor::Sculptor(int _nx, int _ny, int _nz)
 {
-
     nx = _nx;
     ny = _ny;
     nz = _nz;
@@ -371,10 +370,26 @@ std::vector<std::vector<Voxel>> Sculptor::getPlane(int plane)
 
     // Fill plane
 
-    for (int l = 0; l < nx; l++) {
-        for (int c = 0; c < ny; c++) {
-            p[l][c] = v[l][c][plane];
+    for (int l = 0; l < nx; l++)
+    {
+        // Create a new line of Voxels
+
+        std::vector<Voxel> pline;
+        pline.resize(ny); // start with ny columns
+
+        for (int c = 0; c < ny; c++) // fill each voxel with Sculptor's object properites
+        {
+            pline[c].a = v[l][c][plane].a;
+            pline[c].r = v[l][c][plane].r;
+            pline[c].g = v[l][c][plane].g;
+            pline[c].b = v[l][c][plane].b;
+            pline[c].isOn = v[l][c][plane].isOn;
         }
+
+        // Add line to the 2D vector p
+
+        p.push_back(pline);
+
     }
 
     return p;

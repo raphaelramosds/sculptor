@@ -11,7 +11,7 @@
 CanvasPlane::CanvasPlane(QWidget *parent)
     : QWidget{parent}
 {
-    dimh = dimv = dimz = 31;
+    dimh = dimv = dimz = 40;
 }
 
 void CanvasPlane::mousePressEvent(QMouseEvent *event)
@@ -21,7 +21,7 @@ void CanvasPlane::mousePressEvent(QMouseEvent *event)
     currX = event->x()/pixelw;
     currY = event->y()/pixelh;
 
-    emit posicao(currX,currY);
+    emit trigCurrPosition(currX,currY);
 
     qDebug() << currX << " " << currY;
 }
@@ -60,27 +60,34 @@ void CanvasPlane::paintEvent(QPaintEvent *event)
     {
         for(int c=0; c < dimv; c++)
         {
+            // If voxel is on, get its properties
+
+            if (p[l][c].isOn) {
+                brush.setColor(QColor(p[l][c].r * 255,p[l][c].g * 255, p[l][c].b * 255));
+            }
+
+            // Else, draw a default white box
+
+            else {
+                brush.setColor(white);
+            }
+
+            // Update brush and draw the box
+
+            painter.setBrush(brush);
             painter.drawRect(l*pixelh, c*pixelw, pixelh , pixelw);
         }
     }
 }
 
-int CanvasPlane::getDimH()
-{
-    return dimh;
-}
+int CanvasPlane::getDimH() { return dimh; }
+int CanvasPlane::getDimV() { return dimv; }
+int CanvasPlane::getDimZ() { return dimz; }
 
-int CanvasPlane::getDimV()
-{
-    return dimv;
-}
+int CanvasPlane::getCurrX() { return currX; }
+int CanvasPlane::getCurrY() { return currY; }
 
-int CanvasPlane::getDimZ()
-{
-    return dimz;
-}
-
-void CanvasPlane::loadPlane(std::vector<std::vector<Voxel> > plane)
-{
+void CanvasPlane::loadPlane(std::vector<std::vector<Voxel> > plane) {
     p = plane;
+    repaint(); // rebuilt plane each time loadPlane is called
 }

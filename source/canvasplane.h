@@ -46,12 +46,19 @@ public:
     explicit CanvasPlane(QWidget *parent = nullptr);
     void mousePressEvent(QMouseEvent *event);
     void paintEvent(QPaintEvent *event);
+
     int getDimH();
     int getDimV();
     int getDimZ();
+
+    int getCurrX();
+    int getCurrY();
+
+public slots:
     void loadPlane(std::vector<std::vector<Voxel>> plane);
+
 signals:
-    void posicao(int, int);
+    void trigCurrPosition(int, int);
 };
 
 #endif // CANVASPLANE_H

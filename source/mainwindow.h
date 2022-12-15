@@ -17,6 +17,15 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+public slots:
+    void putVoxel();
+    void putBox();
+    void setColor();
+    void putSphere();
+    void putEllipsoid();
+    void setPlane();
+
 private:
     Ui::MainWindow *ui;
     Sculptor* s;

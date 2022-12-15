@@ -37,7 +37,7 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <widget class="CanvasPlane" name="widget" native="true">
+       <widget class="CanvasPlane" name="canvasplane" native="true">
         <property name="enabled">
          <bool>true</bool>
         </property>
@@ -447,13 +447,20 @@
            </item>
            <item>
             <widget class="QSlider" name="horizontalSliderSetRed">
+             <property name="maximum">
+              <number>255</number>
+             </property>
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QSpinBox" name="spinBoxSetRed"/>
+            <widget class="QSpinBox" name="spinBoxSetRed">
+             <property name="maximum">
+              <number>255</number>
+             </property>
+            </widget>
            </item>
           </layout>
          </item>
@@ -474,13 +481,20 @@
            </item>
            <item>
             <widget class="QSlider" name="horizontalSliderSetGreen">
+             <property name="maximum">
+              <number>255</number>
+             </property>
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QSpinBox" name="spinBoxSetGreen"/>
+            <widget class="QSpinBox" name="spinBoxSetGreen">
+             <property name="maximum">
+              <number>255</number>
+             </property>
+            </widget>
            </item>
           </layout>
          </item>
@@ -501,13 +515,20 @@
            </item>
            <item>
             <widget class="QSlider" name="horizontalSliderSetBlue">
+             <property name="maximum">
+              <number>255</number>
+             </property>
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QSpinBox" name="spinBoxSetBlue"/>
+            <widget class="QSpinBox" name="spinBoxSetBlue">
+             <property name="maximum">
+              <number>255</number>
+             </property>
+            </widget>
            </item>
           </layout>
          </item>

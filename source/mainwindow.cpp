@@ -1,13 +1,49 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include <cmath>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    // Carrega a interface
+    // Load MainWindows
 
     ui->setupUi(this);
+
+    // Set up default Sculpture
+
+    s = new Sculptor(
+        ui->canvasplane->getDimH(),
+        ui->canvasplane->getDimV(),
+        ui->canvasplane->getDimZ()
+    );
+
+    // Set up default grid color
+
+    s->setColor(1.0,1.0,1.0,1.0);
+
+    // Set up default plane (z = 0)
+
+    std::vector<std::vector<Voxel>> v = s->getPlane();
+    ui->canvasplane->loadPlane(v);
+
+    // Fixing shapes inputs according to the 3d matrix dimensions
+
+    int maxradius = std::min((ui->canvasplane->getDimH() - 1)/2,
+                        std::min((ui->canvasplane->getDimV() - 1)/2,(ui->canvasplane->getDimZ() - 1)/2));
+
+    ui->spinBoxSphereRadius->setMaximum(maxradius);
+    ui->horizontalSliderSphereRadius->setMaximum(maxradius);
+
+    ui->spinBoxEllipsoidDepth->setMaximum(maxradius);
+    ui->horizontalSliderEllipsoidDepth->setMaximum(maxradius);
+
+    ui->spinBoxEllipsoidHeight->setMaximum(maxradius);
+    ui->horizontalSliderEllipsoidHeight->setMaximum(maxradius);
+
+    ui->spinBoxEllipsoidWidth->setMaximum(maxradius);
+    ui->horizontalSliderEllipsoidWidth->setMaximum(maxradius);
 
     // Box SIGNALS-SLOTS
 
@@ -64,7 +100,7 @@ MainWindow::MainWindow(QWidget *parent)
         SLOT(setValue(int))
     );
 
-    // Set color groupbox SIGNALS->SLOTS
+    // Set current color with slider
 
     connect(
         ui->horizontalSliderSetRed,
@@ -87,7 +123,30 @@ MainWindow::MainWindow(QWidget *parent)
         SLOT(setValue(int))
     );
 
-    // Set plane groupbox SIGNALS->SLOTS
+    // Get color from spin box
+
+    connect(
+        ui->spinBoxSetRed,
+        SIGNAL(valueChanged(int)),
+        this,
+        SLOT(setColor())
+    );
+
+    connect(
+        ui->spinBoxSetGreen,
+        SIGNAL(valueChanged(int)),
+        this,
+        SLOT(setColor())
+    );
+
+    connect(
+        ui->spinBoxSetBlue,
+        SIGNAL(valueChanged(int)),
+        this,
+        SLOT(setColor())
+    );
+
+    // Set plane number with slider SIGNALS->SLOTS
 
     connect(
         ui->horizontalSliderSetPlane,
@@ -95,9 +154,106 @@ MainWindow::MainWindow(QWidget *parent)
         ui->spinBoxSetPlane,
         SLOT(setValue(int))
     );
+
+    // Get current plane from spin box
+
+    connect(
+        ui->spinBoxSetPlane,
+        SIGNAL(valueChanged(int)),
+        this,
+        SLOT(setPlane())
+    );
+
+    // Conexão para testar os metodos da classe Sculptor.
+    // Ponha o nome do método implementado dentro de SLOT()
+
+    connect(
+        ui->canvasplane,
+        SIGNAL(trigCurrPosition(int,int)),
+        this,
+        SLOT(putEllipsoid())
+    );
 }
 
-MainWindow::~MainWindow()
-{
+MainWindow::~MainWindow() {
     delete ui;
+}
+
+void MainWindow::putVoxel() {
+
+    s->setColor((float) ui->spinBoxSetRed->value()/255,
+                (float) ui->spinBoxSetGreen->value()/255,
+                (float) ui->spinBoxSetBlue->value()/255,
+                1.0);
+
+    s->putVoxel(ui->canvasplane->getCurrX(),
+                ui->canvasplane->getCurrY(),
+                ui->spinBoxSetPlane->value());
+
+    ui->canvasplane->loadPlane(s->getPlane(ui->spinBoxSetPlane->value()));
+}
+
+void MainWindow::putBox()
+{
+    int bw = ui->spinBoxBoxWidth->value();
+    int bh = ui->spinBoxBoxHeight->value();
+    int bd = ui->spinBoxBoxDepth->value();
+    int xc = ui->canvasplane->getCurrX();
+    int yc = ui->canvasplane->getCurrY();
+    int zc = ui->spinBoxSetPlane->value();
+
+    s->setColor((float) ui->spinBoxSetRed->value()/255,
+                (float) ui->spinBoxSetGreen->value()/255,
+                (float) ui->spinBoxSetBlue->value()/255,
+                1.0);
+
+    s->putBox(xc - bw/2, xc + bw/2,
+              yc - bh/2, yc + bh/2,
+              zc - bd/2, zc + bd/2);
+
+    ui->canvasplane->loadPlane(s->getPlane(ui->spinBoxSetPlane->value()));
+}
+
+void MainWindow::setColor()
+{
+    s->setColor((float) ui->spinBoxSetRed->value()/255,
+                (float) ui->spinBoxSetGreen->value()/255,
+                (float) ui->spinBoxSetBlue->value()/255,
+                1.0);
+}
+
+void MainWindow::putSphere()
+{
+    s->setColor((float) ui->spinBoxSetRed->value()/255,
+                (float) ui->spinBoxSetGreen->value()/255,
+                (float) ui->spinBoxSetBlue->value()/255,
+                1.0);
+
+    s->putSphere(ui->canvasplane->getCurrX(),
+                 ui->canvasplane->getCurrY(),
+                 ui->spinBoxSetPlane->value(),
+                 ui->spinBoxSphereRadius->value());
+
+    ui->canvasplane->loadPlane(s->getPlane(ui->spinBoxSetPlane->value()));
+}
+
+void MainWindow::putEllipsoid()
+{
+    s->setColor((float) ui->spinBoxSetRed->value()/255,
+                (float) ui->spinBoxSetGreen->value()/255,
+                (float) ui->spinBoxSetBlue->value()/255,
+                1.0);
+
+    s->putEllipsoid(ui->canvasplane->getCurrX(),
+                 ui->canvasplane->getCurrY(),
+                 ui->spinBoxSetPlane->value(),
+                 ui->spinBoxEllipsoidWidth->value(),
+                 ui->spinBoxEllipsoidHeight->value(),
+                 ui->spinBoxEllipsoidDepth->value());
+
+    ui->canvasplane->loadPlane(s->getPlane(ui->spinBoxSetPlane->value()));
+}
+
+void MainWindow::setPlane() {
+    ui->canvasplane->loadPlane(s->getPlane(ui->spinBoxSetPlane->value()));
 }
