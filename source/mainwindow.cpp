@@ -5,6 +5,8 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+    // Carrega a interface
+
     ui->setupUi(this);
 
     // Box SIGNALS-SLOTS
@@ -59,6 +61,38 @@ MainWindow::MainWindow(QWidget *parent)
         ui->horizontalSliderEllipsoidDepth,
         SIGNAL(valueChanged(int)),
         ui->spinBoxEllipsoidDepth,
+        SLOT(setValue(int))
+    );
+
+    // Set color groupbox SIGNALS->SLOTS
+
+    connect(
+        ui->horizontalSliderSetRed,
+        SIGNAL(valueChanged(int)),
+        ui->spinBoxSetRed,
+        SLOT(setValue(int))
+    );
+
+    connect(
+        ui->horizontalSliderSetGreen,
+        SIGNAL(valueChanged(int)),
+        ui->spinBoxSetGreen,
+        SLOT(setValue(int))
+    );
+
+    connect(
+        ui->horizontalSliderSetBlue,
+        SIGNAL(valueChanged(int)),
+        ui->spinBoxSetBlue,
+        SLOT(setValue(int))
+    );
+
+    // Set plane groupbox SIGNALS->SLOTS
+
+    connect(
+        ui->horizontalSliderSetPlane,
+        SIGNAL(valueChanged(int)),
+        ui->spinBoxSetPlane,
         SLOT(setValue(int))
     );
 }
