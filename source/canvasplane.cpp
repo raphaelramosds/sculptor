@@ -113,7 +113,11 @@ int CanvasPlane::getDimZ() { return dimz; }
 int CanvasPlane::getCurrX() { return currX; }
 int CanvasPlane::getCurrY() { return currY; }
 
-void CanvasPlane::loadPlane(std::vector<std::vector<Voxel> > plane) {
+bool CanvasPlane::getRPressed() { return rPressed; }
+bool CanvasPlane::getLPressed() { return lPressed; }
+
+void CanvasPlane::loadPlane(std::vector<std::vector<Voxel> > plane)
+{
     p = plane;
     repaint(); // rebuilt plane each time loadPlane is called
 }

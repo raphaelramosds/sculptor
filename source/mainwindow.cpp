@@ -164,20 +164,72 @@ MainWindow::MainWindow(QWidget *parent)
         SLOT(setPlane())
     );
 
-    // Conexão para testar os metodos da classe Sculptor.
-    // Ponha o nome do método implementado dentro de SLOT()
+    // Draw the chosen shape
 
     connect(
         ui->canvasplane,
         SIGNAL(trigCurrPosition(int,int)),
         this,
-        SLOT(putEllipsoid())
+        SLOT(drawChosenShape())
     );
+
+    // Change drawing mode
+
+    connect(ui->actiondrawVoxel,
+            SIGNAL(triggered(bool)),
+            this,
+            SLOT(changeToVoxelMode()));
+
+    connect(ui->actiondrawBox,
+            SIGNAL(triggered(bool)),
+            this,
+            SLOT(changeToBoxMode()));
+
+    connect(ui->actiondrawSphere,
+            SIGNAL(triggered(bool)),
+            this,
+            SLOT(changeToSphereMode()));
+
+    connect(ui->actiondrawEllipsoid,
+            SIGNAL(triggered(bool)),
+            this,
+            SLOT(changeToEllipsoidMode()));
 }
 
 MainWindow::~MainWindow() {
     delete ui;
 }
+
+void MainWindow::drawChosenShape()
+{
+    switch(drawingMode)
+    {
+    case 0: // voxel
+        if (ui->canvasplane->getLPressed()) putVoxel(); else cutVoxel();
+        break;
+
+    case 1: // box
+        if (ui->canvasplane->getLPressed()) putBox(); else cutBox();
+        break;
+
+    case 2: // sphere
+        if (ui->canvasplane->getLPressed()) putSphere(); else cutSphere();
+        break;
+
+    case 3: // ellipsoid
+        if (ui->canvasplane->getLPressed()) putEllipsoid(); else cutEllipsoid();
+        break;
+
+    default:
+        drawingMode = 0;
+        break;
+    }
+}
+
+void MainWindow::changeToVoxelMode() { drawingMode = 0; }
+void MainWindow::changeToBoxMode() { drawingMode = 1; }
+void MainWindow::changeToSphereMode() { drawingMode = 2; }
+void MainWindow::changeToEllipsoidMode() { drawingMode = 3; }
 
 void MainWindow::putVoxel() {
 
@@ -187,6 +239,15 @@ void MainWindow::putVoxel() {
                 1.0);
 
     s->putVoxel(ui->canvasplane->getCurrX(),
+                ui->canvasplane->getCurrY(),
+                ui->spinBoxSetPlane->value());
+
+    ui->canvasplane->loadPlane(s->getPlane(ui->spinBoxSetPlane->value()));
+}
+
+void MainWindow::cutVoxel()
+{
+    s->cutVoxel(ui->canvasplane->getCurrX(),
                 ui->canvasplane->getCurrY(),
                 ui->spinBoxSetPlane->value());
 
@@ -208,6 +269,22 @@ void MainWindow::putBox()
                 1.0);
 
     s->putBox(xc - bw/2, xc + bw/2,
+              yc - bh/2, yc + bh/2,
+              zc - bd/2, zc + bd/2);
+
+    ui->canvasplane->loadPlane(s->getPlane(ui->spinBoxSetPlane->value()));
+}
+
+void MainWindow::cutBox()
+{
+    int bw = ui->spinBoxBoxWidth->value();
+    int bh = ui->spinBoxBoxHeight->value();
+    int bd = ui->spinBoxBoxDepth->value();
+    int xc = ui->canvasplane->getCurrX();
+    int yc = ui->canvasplane->getCurrY();
+    int zc = ui->spinBoxSetPlane->value();
+
+    s->cutBox(xc - bw/2, xc + bw/2,
               yc - bh/2, yc + bh/2,
               zc - bd/2, zc + bd/2);
 
@@ -237,6 +314,16 @@ void MainWindow::putSphere()
     ui->canvasplane->loadPlane(s->getPlane(ui->spinBoxSetPlane->value()));
 }
 
+void MainWindow::cutSphere()
+{
+    s->cutSphere(ui->canvasplane->getCurrX(),
+                 ui->canvasplane->getCurrY(),
+                 ui->spinBoxSetPlane->value(),
+                 ui->spinBoxSphereRadius->value());
+
+    ui->canvasplane->loadPlane(s->getPlane(ui->spinBoxSetPlane->value()));
+}
+
 void MainWindow::putEllipsoid()
 {
     s->setColor((float) ui->spinBoxSetRed->value()/255,
@@ -254,6 +341,21 @@ void MainWindow::putEllipsoid()
     ui->canvasplane->loadPlane(s->getPlane(ui->spinBoxSetPlane->value()));
 }
 
+void MainWindow::cutEllipsoid()
+{
+    s->cutEllipsoid(ui->canvasplane->getCurrX(),
+                 ui->canvasplane->getCurrY(),
+                 ui->spinBoxSetPlane->value(),
+                 ui->spinBoxEllipsoidWidth->value(),
+                 ui->spinBoxEllipsoidHeight->value(),
+                 ui->spinBoxEllipsoidDepth->value());
+
+    ui->canvasplane->loadPlane(s->getPlane(ui->spinBoxSetPlane->value()));
+}
+
 void MainWindow::setPlane() {
     ui->canvasplane->loadPlane(s->getPlane(ui->spinBoxSetPlane->value()));
 }
+
+
+

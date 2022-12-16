@@ -61,6 +61,9 @@ public:
     int getCurrX();
     int getCurrY();
 
+    bool getRPressed();
+    bool getLPressed();
+
 public slots:
     void loadPlane(std::vector<std::vector<Voxel>> plane);
 

@@ -19,15 +19,32 @@ public:
     ~MainWindow();
 
 public slots:
+
     void putVoxel();
+    void cutVoxel();
+
     void putBox();
+    void cutBox();
+
     void setColor();
+
     void putSphere();
+    void cutSphere();
+
     void putEllipsoid();
+    void cutEllipsoid();
+
     void setPlane();
+    void drawChosenShape();
+
+    void changeToVoxelMode();
+    void changeToBoxMode();
+    void changeToSphereMode();
+    void changeToEllipsoidMode();
 
 private:
     Ui::MainWindow *ui;
     Sculptor* s;
+    int drawingMode;
 };
 #endif // MAINWINDOW_H
