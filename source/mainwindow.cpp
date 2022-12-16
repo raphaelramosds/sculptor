@@ -11,6 +11,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->setupUi(this);
 
+    ui->tabWidgetShapes->setTabVisible(0,false);
+    ui->tabWidgetShapes->setTabVisible(1,false);
+    ui->tabWidgetShapes->setTabVisible(2,false);
+
     // Set up default Sculpture
 
     s = new Sculptor(
@@ -226,10 +230,30 @@ void MainWindow::drawChosenShape()
     }
 }
 
-void MainWindow::changeToVoxelMode() { drawingMode = 0; }
-void MainWindow::changeToBoxMode() { drawingMode = 1; }
-void MainWindow::changeToSphereMode() { drawingMode = 2; }
-void MainWindow::changeToEllipsoidMode() { drawingMode = 3; }
+void MainWindow::changeToVoxelMode() {
+    drawingMode = 0;
+}
+void MainWindow::changeToBoxMode() {
+    drawingMode = 1;
+    ui->tabWidgetShapes->setCurrentWidget(ui->boxTab);
+    ui->tabWidgetShapes->setTabVisible(0,true);
+    ui->tabWidgetShapes->setTabVisible(1,false);
+    ui->tabWidgetShapes->setTabVisible(2,false);
+}
+void MainWindow::changeToSphereMode() {
+    drawingMode = 2;
+    ui->tabWidgetShapes->setCurrentWidget(ui->sphereTab);
+    ui->tabWidgetShapes->setTabVisible(0,false);
+    ui->tabWidgetShapes->setTabVisible(1,true);
+    ui->tabWidgetShapes->setTabVisible(2,false);
+}
+void MainWindow::changeToEllipsoidMode() {
+    drawingMode = 3;
+    ui->tabWidgetShapes->setCurrentWidget(ui->ellipsoidTab);
+    ui->tabWidgetShapes->setTabVisible(0,false);
+    ui->tabWidgetShapes->setTabVisible(1,false);
+    ui->tabWidgetShapes->setTabVisible(2,true);
+}
 
 void MainWindow::putVoxel() {
 

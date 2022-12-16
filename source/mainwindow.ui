@@ -79,7 +79,7 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_13">
       <item>
-       <widget class="QTabWidget" name="tabWidgetSetShapesDimensions">
+       <widget class="QTabWidget" name="tabWidgetShapes">
         <property name="minimumSize">
          <size>
           <width>200</width>
@@ -96,6 +96,9 @@
          <number>0</number>
         </property>
         <widget class="QWidget" name="boxTab">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
          <attribute name="title">
           <string>Caixa</string>
          </attribute>
