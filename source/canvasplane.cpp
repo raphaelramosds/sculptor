@@ -67,7 +67,12 @@ void CanvasPlane::paintEvent(QPaintEvent *event)
     pixelh = (height()/dimh);
     pixelw = (width()/dimv);
 
+    // Change the size
+
     (pixelh>pixelw) ? fat = pixelh : fat = pixelw; // quare matrix = 'smaller dim'
+    resize(900, 900); // default = '700x700'
+    setMinimumSize(900,900); // default = '700x700'
+    setMaximumSize(900,900); // default = '1280x1280'
 
     // Canvas border and fill
 
@@ -79,7 +84,7 @@ void CanvasPlane::paintEvent(QPaintEvent *event)
 
     painter.setBrush(brush);
     painter.setPen(pen);
-    painter.drawRect(0,0,width(),height());
+    painter.drawRect(0,0,pixelh,pixelw);
 
     // Canvas' cols and lines
 
