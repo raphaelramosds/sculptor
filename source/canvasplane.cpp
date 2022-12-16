@@ -11,6 +11,7 @@
 CanvasPlane::CanvasPlane(QWidget *parent)
     : QWidget{parent}
 {
+    rPressed = lPressed = false;
     dimh = dimv = dimz = 40;
     setMouseTracking(true);
 }

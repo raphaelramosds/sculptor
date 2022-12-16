@@ -109,11 +109,14 @@ void Sculptor::putBox(int x0, int x1, int y0, int y1, int z0, int z1)
         {
             for (int c = y0; c <= y1; c++)
             {
-                v[l][c][p].isOn = true;
-                v[l][c][p].r = this->r;
-                v[l][c][p].g = this->g;
-                v[l][c][p].b = this->b;
-                v[l][c][p].a = this->a;
+                if ((l < nx && l >= 0) && (c < ny && c >= 0) && (p< nz && p >= 0))
+                {
+                    v[l][c][p].isOn = true;
+                    v[l][c][p].r = this->r;
+                    v[l][c][p].g = this->g;
+                    v[l][c][p].b = this->b;
+                    v[l][c][p].a = this->a;
+                }
             }
         }
     }
@@ -131,7 +134,8 @@ void Sculptor::cutBox(int x0, int x1, int y0, int y1, int z0, int z1)
         {
             for (int c = y0; c <= y1; c++)
             {
-                v[l][c][p].isOn = false;
+                if ((l < nx && l >= 0) && (c < ny && c >= 0) && (p< nz && p >= 0))
+                    v[l][c][p].isOn = false;
             }
         }
     }
@@ -159,13 +163,16 @@ void Sculptor::putSphere(int xcenter, int ycenter, int zcenter, int radius)
                 float y = c - ycenter;
                 float z = p - zcenter;
 
-                if (x * x + y * y + z * z < radius * radius)
+                if ((l < nx && l >= 0) && (c < ny && c >= 0) && (p< nz && p >= 0))
                 {
-                    v[l][c][p].isOn = true;
-                    v[l][c][p].r = this->r;
-                    v[l][c][p].g = this->g;
-                    v[l][c][p].b = this->b;
-                    v[l][c][p].a = this->a;
+                    if (x * x + y * y + z * z < radius * radius)
+                    {
+                        v[l][c][p].isOn = true;
+                        v[l][c][p].r = this->r;
+                        v[l][c][p].g = this->g;
+                        v[l][c][p].b = this->b;
+                        v[l][c][p].a = this->a;
+                    }
                 }
             }
         }
@@ -184,15 +191,13 @@ void Sculptor::cutSphere(int xcenter, int ycenter, int zcenter, int radius)
         {
             for (int c = ycenter - radius; c < ycenter + radius; c++)
             {
-
                 float x = l - xcenter;
                 float y = c - ycenter;
                 float z = p - zcenter;
 
-                if (x * x + y * y + z * z < radius * radius)
-                {
-                    v[l][c][p].isOn = false;
-                }
+                if ((l < nx && l >= 0) && (c < ny && c >= 0) && (p< nz && p >= 0))
+                    if (x * x + y * y + z * z < radius * radius)
+                        v[l][c][p].isOn = false;
             }
         }
     }
@@ -214,13 +219,16 @@ void Sculptor::putEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int r
                 float y = (float)(c - ycenter) / ry;
                 float z = (float)(p - zcenter) / rz;
 
-                if (x * x + y * y + z * z < 1)
+                if ((l < nx && l >= 0) && (c < ny && c >= 0) && (p< nz && p >= 0))
                 {
-                    v[l][c][p].isOn = true;
-                    v[l][c][p].r = this->r;
-                    v[l][c][p].g = this->g;
-                    v[l][c][p].b = this->b;
-                    v[l][c][p].a = this->a;
+                    if (x * x + y * y + z * z < 1)
+                    {
+                        v[l][c][p].isOn = true;
+                        v[l][c][p].r = this->r;
+                        v[l][c][p].g = this->g;
+                        v[l][c][p].b = this->b;
+                        v[l][c][p].a = this->a;
+                    }
                 }
             }
         }
@@ -245,10 +253,9 @@ void Sculptor::cutEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int r
                 float y = (float)(c - ycenter) / ry;
                 float z = (float)(p - zcenter) / rz;
 
-                if (x * x + y * y + z * z < 1)
-                {
-                    v[l][c][p].isOn = false;
-                }
+                if ((l < nx && l >= 0) && (c < ny && c >= 0) && (p< nz && p >= 0))
+                    if (x * x + y * y + z * z < 1)
+                        v[l][c][p].isOn = false;
             }
         }
     }
