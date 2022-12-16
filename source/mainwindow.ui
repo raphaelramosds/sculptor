@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1227</width>
+    <width>1232</width>
     <height>963</height>
    </rect>
   </property>
@@ -43,8 +43,8 @@
         </property>
         <property name="minimumSize">
          <size>
-          <width>900</width>
-          <height>900</height>
+          <width>200</width>
+          <height>200</height>
          </size>
         </property>
         <property name="maximumSize">
@@ -93,7 +93,6 @@
          </size>
         </property>
         <property name="currentIndex">
-         <number>0</number>
          <number>0</number>
         </property>
         <widget class="QWidget" name="boxTab">
@@ -599,8 +598,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1227</width>
-     <height>22</height>
+     <width>1232</width>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuArquivo">

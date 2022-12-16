@@ -103,11 +103,11 @@ void Sculptor::putBox(int x0, int x1, int y0, int y1, int z0, int z1)
 {
     fout << "putbox " << x0 << " " << x1 << " " << y0 << " " << y1 << " " << z0 << " " << z1 << " " << this->r << " " << this->g << " " << this->b << " " << this->a << std::endl;
 
-    for (int p = z0; p <= z1; p++)
+    for (int p = z0; p < z1; p++)
     {
-        for (int l = x0; l <= x1; l++)
+        for (int l = x0; l < x1; l++)
         {
-            for (int c = y0; c <= y1; c++)
+            for (int c = y0; c < y1; c++)
             {
                 v[l][c][p].isOn = true;
                 v[l][c][p].r = this->r;
@@ -125,11 +125,11 @@ void Sculptor::cutBox(int x0, int x1, int y0, int y1, int z0, int z1)
 {
     fout << "cutbox " << x0 << " " << x1 << " " << y0 << " " << y1 << " " << z0 << " " << z1 << std::endl;
 
-    for (int p = z0; p <= z1; p++)
+    for (int p = z0; p < z1; p++)
     {
-        for (int l = x0; l <= x1; l++)
+        for (int l = x0; l < x1; l++)
         {
-            for (int c = y0; c <= y1; c++)
+            for (int c = y0; c < y1; c++)
             {
                 v[l][c][p].isOn = false;
             }
