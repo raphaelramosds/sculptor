@@ -1,4 +1,5 @@
 #include "canvasplane.h"
+
 #include <QWidget>
 #include <QPainter>
 #include <QBrush>
@@ -10,23 +11,45 @@
 CanvasPlane::CanvasPlane(QWidget *parent)
     : QWidget{parent}
 {
-    // Dimensão horizontal e vertical da matriz
-
-    dimh = 41; // obs: put '19x19'
-    dimv = 31;
+    dimh = dimv = dimz = 40;
+    setMouseTracking(true);
 }
 
 void CanvasPlane::mousePressEvent(QMouseEvent *event)
 {
-
-
-    qDebug() << width() << " " << height();
-
+    if (event->button() == Qt::RightButton) rPressed = true;
+    if (event->button() == Qt::LeftButton) lPressed = true;
 
     currX = event->x()/pixelw;
     currY = event->y()/pixelh;
-    emit posicao(currX,currY);
+
+    emit trigCurrPosition(currX,currY);
+
     qDebug() << currX << " " << currY;
+}
+
+void CanvasPlane::mouseMoveEvent(QMouseEvent *event)
+{
+    if (rPressed || lPressed)
+    {
+        currX = event->x()/pixelw;
+        currY = event->y()/pixelh;
+
+        emit trigCurrPosition(currX,currY);
+
+        qDebug() << currX << " " << currY;
+    }
+}
+
+void CanvasPlane::mouseReleaseEvent(QMouseEvent *event)
+{
+    // Left button released or not
+
+    if (lPressed) lPressed = false;
+
+    // Right button released or not
+
+    if (rPressed) rPressed = false;
 }
 
 void CanvasPlane::paintEvent(QPaintEvent *event)
@@ -38,12 +61,10 @@ void CanvasPlane::paintEvent(QPaintEvent *event)
     QBrush brush;
     QPen pen;
 
-    // Altura e largura dos pixels do plano
+    // Plane height and width
 
     pixelh = (height()/dimh);
     pixelw = (width()/dimv);
-
-    // ternary conditional operator
 
     (pixelh>pixelw) ? fat = pixelh : fat = pixelw; // quare matrix = 'smaller dim'
 
@@ -61,9 +82,42 @@ void CanvasPlane::paintEvent(QPaintEvent *event)
 
     // Canvas' cols and lines
 
-    for(unsigned int l=0; l < dimv; l++){
-        for(unsigned int c=0; c < dimh; c++){
+    for(int l=0; l < dimh; l++)
+    {
+        for(int c=0; c < dimv; c++)
+        {
+            // If voxel is on, get its properties
+
+            if (p[l][c].isOn) {
+                brush.setColor(QColor(p[l][c].r * 255,p[l][c].g * 255, p[l][c].b * 255));
+            }
+
+            // Else, draw a default white box
+
+            else {
+                brush.setColor(white);
+            }
+
+            // Update brush and draw the box
+
+            painter.setBrush(brush);
             painter.drawRect(l*pixelh, c*pixelw, pixelh , pixelw);
         }
     }
+}
+
+int CanvasPlane::getDimH() { return dimh; }
+int CanvasPlane::getDimV() { return dimv; }
+int CanvasPlane::getDimZ() { return dimz; }
+
+int CanvasPlane::getCurrX() { return currX; }
+int CanvasPlane::getCurrY() { return currY; }
+
+bool CanvasPlane::getRPressed() { return rPressed; }
+bool CanvasPlane::getLPressed() { return lPressed; }
+
+void CanvasPlane::loadPlane(std::vector<std::vector<Voxel> > plane)
+{
+    p = plane;
+    repaint(); // rebuilt plane each time loadPlane is called
 }
