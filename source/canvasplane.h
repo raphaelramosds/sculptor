@@ -20,7 +20,7 @@ private:
     std::vector<std::vector<Voxel>> p;
 
     /**
-     * @brief Dimensions of the plane to be drown
+     * @brief Dimensions of the plane to be drown (horizontal, vertica and z dimensions)
      * */
 
     int dimh;
@@ -28,7 +28,7 @@ private:
     int dimz;
 
     /**
-     * @brief Dimensions of each pixel of the plane to be drown
+     * @brief Dimensions of each pixel of the plane to be drown (pixel's height and width)
      * */
 
     int pixelh;
@@ -41,6 +41,10 @@ private:
 
     int currX;
     int currY;
+
+    /**
+     * @brief Straight properties for update right and left clicks states
+     * */
 
     bool rPressed;
     bool lPressed;

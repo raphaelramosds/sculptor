@@ -34,20 +34,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Fixing shapes inputs according to the 3d matrix dimensions
 
-    int maxradius = std::min((ui->canvasplane->getDimH() - 1)/2,
-                        std::min((ui->canvasplane->getDimV() - 1)/2,(ui->canvasplane->getDimZ() - 1)/2));
-
-    ui->spinBoxSphereRadius->setMaximum(maxradius);
-    ui->horizontalSliderSphereRadius->setMaximum(maxradius);
-
-    ui->spinBoxEllipsoidDepth->setMaximum(maxradius);
-    ui->horizontalSliderEllipsoidDepth->setMaximum(maxradius);
-
-    ui->spinBoxEllipsoidHeight->setMaximum(maxradius);
-    ui->horizontalSliderEllipsoidHeight->setMaximum(maxradius);
-
-    ui->spinBoxEllipsoidWidth->setMaximum(maxradius);
-    ui->horizontalSliderEllipsoidWidth->setMaximum(maxradius);
+    fixInputsBoundaries();
 
     // Box SIGNALS-SLOTS
 
@@ -198,6 +185,14 @@ MainWindow::MainWindow(QWidget *parent)
             SIGNAL(triggered(bool)),
             this,
             SLOT(changeToEllipsoidMode()));
+
+
+    // Save OFF
+
+    connect(ui->actionExportOFF,
+            SIGNAL(triggered(bool)),
+            this,
+            SLOT(saveOFF()));
 }
 
 MainWindow::~MainWindow() {
@@ -230,8 +225,25 @@ void MainWindow::drawChosenShape()
     }
 }
 
+void MainWindow::saveOFF() {
+
+    QMessageBox msgbox;
+    QString filename = QFileDialog::getSaveFileName(this, "Salvar","/","OFF (*.off)");
+
+    const char* fname = filename.toLocal8Bit().constData(); // casting go char*
+
+    s->writeOFF(fname);
+
+    msgbox.setText("Escultura salva com sucesso");
+    msgbox.exec();
+
+}
+
 void MainWindow::changeToVoxelMode() {
     drawingMode = 0;
+    ui->tabWidgetShapes->setTabVisible(0,false);
+    ui->tabWidgetShapes->setTabVisible(1,false);
+    ui->tabWidgetShapes->setTabVisible(2,false);
 }
 void MainWindow::changeToBoxMode() {
     drawingMode = 1;
@@ -375,6 +387,42 @@ void MainWindow::cutEllipsoid()
                  ui->spinBoxEllipsoidDepth->value());
 
     ui->canvasplane->loadPlane(s->getPlane(ui->spinBoxSetPlane->value()));
+}
+
+void MainWindow::fixInputsBoundaries()
+{
+    // Sphere and Ellipsoid maximum radius
+
+    int maxradius = std::min((ui->canvasplane->getDimH() - 1)/2,
+                        std::min((ui->canvasplane->getDimV() - 1)/2,(ui->canvasplane->getDimZ() - 1)/2));
+
+    ui->spinBoxSphereRadius->setMaximum(maxradius);
+    ui->horizontalSliderSphereRadius->setMaximum(maxradius);
+
+    ui->spinBoxEllipsoidDepth->setMaximum(maxradius);
+    ui->horizontalSliderEllipsoidDepth->setMaximum(maxradius);
+
+    ui->spinBoxEllipsoidHeight->setMaximum(maxradius);
+    ui->horizontalSliderEllipsoidHeight->setMaximum(maxradius);
+
+    ui->spinBoxEllipsoidWidth->setMaximum(maxradius);
+    ui->horizontalSliderEllipsoidWidth->setMaximum(maxradius);
+
+    // Box boundaries
+
+    ui->horizontalSliderBoxDepth->setMaximum(ui->canvasplane->getDimZ() - 1);
+    ui->spinBoxBoxDepth->setMaximum(ui->canvasplane->getDimZ() - 1);
+
+    ui->horizontalSliderBoxWidth->setMaximum(ui->canvasplane->getDimH() - 1);
+    ui->spinBoxBoxWidth->setMaximum(ui->canvasplane->getDimH() - 1);
+
+    ui->horizontalSliderBoxWidth->setMaximum(ui->canvasplane->getDimV() - 1);
+    ui->spinBoxBoxHeight->setMaximum(ui->canvasplane->getDimV() - 1);
+
+    // Maximum depth
+
+    ui->horizontalSliderSetPlane->setMaximum(ui->canvasplane->getDimZ() - 1);
+    ui->spinBoxSetPlane->setMaximum(ui->canvasplane->getDimZ() - 1);
 }
 
 void MainWindow::setPlane() {

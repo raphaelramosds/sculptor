@@ -2,6 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QFileDialog>
+#include <QMessageBox>
+
 #include <vector>
 
 #include "sculptor.h"
@@ -34,8 +37,10 @@ public slots:
     void putEllipsoid();
     void cutEllipsoid();
 
+    void fixInputsBoundaries();
     void setPlane();
     void drawChosenShape();
+    void saveOFF();
 
     void changeToVoxelMode();
     void changeToBoxMode();
