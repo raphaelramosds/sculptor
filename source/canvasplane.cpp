@@ -69,7 +69,7 @@ void CanvasPlane::paintEvent(QPaintEvent *event)
 
     // Change the size
 
-    (pixelh>pixelw) ? fat = pixelh : fat = pixelw; // quare matrix = 'smaller dim'
+    (pixelh>pixelw) ? fat = pixelh : fat = pixelw; // square matrix = 'smaller dim'
     resize(900, 900); // default = '700x700'
     setMinimumSize(900,900); // default = '700x700'
     setMaximumSize(900,900); // default = '1280x1280'
@@ -115,6 +115,22 @@ void CanvasPlane::paintEvent(QPaintEvent *event)
 int CanvasPlane::getDimH() { return dimh; }
 int CanvasPlane::getDimV() { return dimv; }
 int CanvasPlane::getDimZ() { return dimz; }
+
+int CanvasPlane::changeDimH(int x)
+{
+    dimh = x;
+    return dimh;
+}
+int CanvasPlane::changeDimV(int y)
+{
+    dimv = y;
+    return dimv;
+}
+int CanvasPlane::changeDimZ(int z)
+{
+    dimz = z;
+    return dimz;
+}
 
 int CanvasPlane::getCurrX() { return currX; }
 int CanvasPlane::getCurrY() { return currY; }

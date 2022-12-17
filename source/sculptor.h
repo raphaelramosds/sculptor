@@ -101,6 +101,7 @@ public:
        * */
 
     std::vector<std::vector<Voxel>> getPlane(int plane = 0);
+    void realocPlane();
 
 };
 #endif // SCULPTOR_H

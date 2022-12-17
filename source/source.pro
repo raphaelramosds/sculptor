@@ -10,17 +10,20 @@ CONFIG += c++17
 
 SOURCES += \
     canvasplane.cpp \
+    dialog.cpp \
     main.cpp \
     mainwindow.cpp \
     sculptor.cpp
 
 HEADERS += \
     canvasplane.h \
+    dialog.h \
     mainwindow.h \
     sculptor.h \
     voxel.h
 
 FORMS += \
+    dialog.ui \
     mainwindow.ui
 
 # Default rules for deployment.

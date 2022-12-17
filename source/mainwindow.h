@@ -8,6 +8,7 @@
 #include <vector>
 
 #include "sculptor.h"
+#include "dialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -38,9 +39,13 @@ public slots:
     void cutEllipsoid();
 
     void fixInputsBoundaries();
+    void resetBoundaries();
     void setPlane();
     void drawChosenShape();
     void saveOFF();
+    void newPlane();
+    void exit_();
+    void newPlaneDialog();
 
     void changeToVoxelMode();
     void changeToBoxMode();

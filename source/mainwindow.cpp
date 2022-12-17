@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 
 #include <cmath>
+#include <cstdlib>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -10,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     // Load MainWindows
 
     ui->setupUi(this);
+
 
     ui->tabWidgetShapes->setTabVisible(0,false);
     ui->tabWidgetShapes->setTabVisible(1,false);
@@ -35,6 +37,10 @@ MainWindow::MainWindow(QWidget *parent)
     // Fixing shapes inputs according to the 3d matrix dimensions
 
     fixInputsBoundaries();
+
+    // Standard template
+
+    resetBoundaries();
 
     // Box SIGNALS-SLOTS
 
@@ -193,6 +199,20 @@ MainWindow::MainWindow(QWidget *parent)
             SIGNAL(triggered(bool)),
             this,
             SLOT(saveOFF()));
+
+    // New Plane
+
+    connect(ui->actionNewPlane,
+            SIGNAL(triggered(bool)),
+            this,
+            SLOT(newPlane()));
+
+    // Exit
+
+    connect(ui->actionQuit,
+            SIGNAL(triggered(bool)),
+            this,
+            SLOT(exit_()));
 }
 
 MainWindow::~MainWindow() {
@@ -237,6 +257,40 @@ void MainWindow::saveOFF() {
     msgbox.setText("Escultura salva com sucesso");
     msgbox.exec();
 
+}
+
+void MainWindow::newPlane() {
+    newPlaneDialog();
+}
+
+void MainWindow::exit_() {
+    exit(0);
+}
+
+void MainWindow::newPlaneDialog()
+{
+    Dialog *d;
+    d = new Dialog();
+    d->exec();
+
+    if (d->result() == QDialog::Accepted){
+
+        ui->canvasplane->changeDimH(d->getSpinDialogX());
+        ui->canvasplane->changeDimV(d->getSpinDialogY());
+        ui->canvasplane->changeDimZ(d->getSpinDialogZ());
+        fixInputsBoundaries();
+
+        if(s != NULL)
+            s->realocPlane();
+
+        s = new Sculptor(ui->canvasplane->getDimH(), ui->canvasplane->getDimV(), ui->canvasplane->getDimZ());
+
+        fixInputsBoundaries();
+        resetBoundaries();
+        ui->canvasplane->loadPlane(s->getPlane(0));
+    }
+
+    delete d;
 }
 
 void MainWindow::changeToVoxelMode() {
@@ -416,13 +470,30 @@ void MainWindow::fixInputsBoundaries()
     ui->horizontalSliderBoxWidth->setMaximum(ui->canvasplane->getDimH() - 1);
     ui->spinBoxBoxWidth->setMaximum(ui->canvasplane->getDimH() - 1);
 
-    ui->horizontalSliderBoxWidth->setMaximum(ui->canvasplane->getDimV() - 1);
+    ui->horizontalSliderBoxHeight->setMaximum(ui->canvasplane->getDimV() - 1);
     ui->spinBoxBoxHeight->setMaximum(ui->canvasplane->getDimV() - 1);
 
     // Maximum depth
 
     ui->horizontalSliderSetPlane->setMaximum(ui->canvasplane->getDimZ() - 1);
     ui->spinBoxSetPlane->setMaximum(ui->canvasplane->getDimZ() - 1);
+
+}
+
+void MainWindow::resetBoundaries() {
+
+    // Reset propieties
+    ui->horizontalSliderSphereRadius->setValue(0);
+    ui->horizontalSliderEllipsoidDepth->setValue(0);
+    ui->horizontalSliderEllipsoidHeight->setValue(0);
+    ui->horizontalSliderEllipsoidWidth->setValue(0);
+    ui->horizontalSliderBoxDepth->setValue(0);
+    ui->horizontalSliderBoxWidth->setValue(0);
+    ui->horizontalSliderBoxHeight->setValue(0);
+    ui->horizontalSliderSetPlane->setValue((ui->canvasplane->getDimZ() - 1)/2);
+    ui->horizontalSliderSetRed->setValue(0);
+    ui->horizontalSliderSetGreen->setValue(0);
+    ui->horizontalSliderSetBlue->setValue(0);
 }
 
 void MainWindow::setPlane() {

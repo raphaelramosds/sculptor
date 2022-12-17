@@ -5,6 +5,7 @@
 #include <vector>
 
 #include <QWidget>
+#include <QSpinBox>
 
 class CanvasPlane : public QWidget
 {
@@ -61,6 +62,10 @@ public:
     int getDimH();
     int getDimV();
     int getDimZ();
+
+    int changeDimH(int x);
+    int changeDimV(int y);
+    int changeDimZ(int z);
 
     int getCurrX();
     int getCurrY();
