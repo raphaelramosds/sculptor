@@ -12,7 +12,9 @@ CanvasPlane::CanvasPlane(QWidget *parent)
     : QWidget{parent}
 {
     rPressed = lPressed = false;
-    dimh = dimv = dimz = 40;
+    dimh = 17;
+    dimv = 19;
+    dimz = 13;
     setMouseTracking(true);
 }
 
@@ -69,10 +71,11 @@ void CanvasPlane::paintEvent(QPaintEvent *event)
 
     // Change the size
 
-    (pixelh>pixelw) ? fat = pixelh : fat = pixelw; // square matrix = 'smaller dim'
-    resize(900, 900); // default = '700x700'
-    setMinimumSize(900,900); // default = '700x700'
-    setMaximumSize(900,900); // default = '1280x1280'
+    (pixelh > pixelw) ? fat = pixelw : fat = pixelh; // square matrix = 'smaller dim'
+
+    //resize(900, 900);        // default = '700x700'
+    //setMinimumSize(900,900); // default = '700x700'
+    //setMaximumSize(900,900); // default = '1280x1280'
 
     // Canvas border and fill
 
@@ -107,7 +110,8 @@ void CanvasPlane::paintEvent(QPaintEvent *event)
             // Update brush and draw the box
 
             painter.setBrush(brush);
-            painter.drawRect(l*pixelh, c*pixelw, pixelh , pixelw);
+            painter.drawRect(l*fat, c*fat, fat , fat);
+
         }
     }
 }
@@ -119,17 +123,17 @@ int CanvasPlane::getDimZ() { return dimz; }
 int CanvasPlane::changeDimH(int x)
 {
     dimh = x;
-    return dimh;
+    return x;
 }
 int CanvasPlane::changeDimV(int y)
 {
     dimv = y;
-    return dimv;
+    return y;
 }
 int CanvasPlane::changeDimZ(int z)
 {
     dimz = z;
-    return dimz;
+    return z;
 }
 
 int CanvasPlane::getCurrX() { return currX; }

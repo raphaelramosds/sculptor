@@ -283,7 +283,9 @@ void MainWindow::newPlaneDialog()
         if(s != NULL)
             s->realocPlane();
 
-        s = new Sculptor(ui->canvasplane->getDimH(), ui->canvasplane->getDimV(), ui->canvasplane->getDimZ());
+        s = new Sculptor(ui->canvasplane->getDimH(),
+                         ui->canvasplane->getDimV(),
+                         ui->canvasplane->getDimZ());
 
         fixInputsBoundaries();
         resetBoundaries();
@@ -490,7 +492,7 @@ void MainWindow::resetBoundaries() {
     ui->horizontalSliderBoxDepth->setValue(0);
     ui->horizontalSliderBoxWidth->setValue(0);
     ui->horizontalSliderBoxHeight->setValue(0);
-    ui->horizontalSliderSetPlane->setValue((ui->canvasplane->getDimZ() - 1)/2);
+    ui->horizontalSliderSetPlane->setValue(0);
     ui->horizontalSliderSetRed->setValue(0);
     ui->horizontalSliderSetGreen->setValue(0);
     ui->horizontalSliderSetBlue->setValue(0);

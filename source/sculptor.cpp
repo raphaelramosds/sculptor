@@ -69,11 +69,11 @@ void Sculptor::putVoxel(int x, int y, int z)
 {
     if ((x < nx && x >= 0) && (y < ny && y >= 0) && (z < nz && z >= 0))
     {
-        v[x][y][z].isOn = true;
-        v[x][y][z].r = r;
-        v[x][y][z].g = g;
-        v[x][y][z].b = b;
-        v[x][y][z].a = a;
+        v[z][x][y].isOn = true;
+        v[z][x][y].r = r;
+        v[z][x][y].g = g;
+        v[z][x][y].b = b;
+        v[z][x][y].a = a;
         fout << "putvoxel " << x << " " << y << " " << z << " " << this->r << " " << this->g << " " << this->b << " " << this->a << std::endl;
     }
     else
@@ -88,7 +88,7 @@ void Sculptor::cutVoxel(int x, int y, int z)
 {
     if ((x < nx && x >= 0) && (y < ny && y >= 0) && (z < nz && z >= 0))
     {
-        v[x][y][z].isOn = false;
+        v[z][x][y].isOn = false;
         fout << "cutvoxel " << x << " " << y << " " << z << std::endl;
     }
     else
@@ -111,11 +111,11 @@ void Sculptor::putBox(int x0, int x1, int y0, int y1, int z0, int z1)
             {
                 if ((l < nx && l >= 0) && (c < ny && c >= 0) && (p< nz && p >= 0))
                 {
-                    v[l][c][p].isOn = true;
-                    v[l][c][p].r = this->r;
-                    v[l][c][p].g = this->g;
-                    v[l][c][p].b = this->b;
-                    v[l][c][p].a = this->a;
+                    v[p][l][c].isOn = true;
+                    v[p][l][c].r = this->r;
+                    v[p][l][c].g = this->g;
+                    v[p][l][c].b = this->b;
+                    v[p][l][c].a = this->a;
                 }
             }
         }
@@ -135,7 +135,7 @@ void Sculptor::cutBox(int x0, int x1, int y0, int y1, int z0, int z1)
             for (int c = y0; c < y1; c++)
             {
                 if ((l < nx && l >= 0) && (c < ny && c >= 0) && (p< nz && p >= 0))
-                    v[l][c][p].isOn = false;
+                    v[p][l][c].isOn = false;
             }
         }
     }
@@ -167,11 +167,11 @@ void Sculptor::putSphere(int xcenter, int ycenter, int zcenter, int radius)
                 {
                     if (x * x + y * y + z * z < radius * radius)
                     {
-                        v[l][c][p].isOn = true;
-                        v[l][c][p].r = this->r;
-                        v[l][c][p].g = this->g;
-                        v[l][c][p].b = this->b;
-                        v[l][c][p].a = this->a;
+                        v[p][l][c].isOn = true;
+                        v[p][l][c].r = this->r;
+                        v[p][l][c].g = this->g;
+                        v[p][l][c].b = this->b;
+                        v[p][l][c].a = this->a;
                     }
                 }
             }
@@ -197,7 +197,7 @@ void Sculptor::cutSphere(int xcenter, int ycenter, int zcenter, int radius)
 
                 if ((l < nx && l >= 0) && (c < ny && c >= 0) && (p< nz && p >= 0))
                     if (x * x + y * y + z * z < radius * radius)
-                        v[l][c][p].isOn = false;
+                        v[p][l][c].isOn = false;
             }
         }
     }
@@ -223,11 +223,11 @@ void Sculptor::putEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int r
                 {
                     if (x * x + y * y + z * z < 1)
                     {
-                        v[l][c][p].isOn = true;
-                        v[l][c][p].r = this->r;
-                        v[l][c][p].g = this->g;
-                        v[l][c][p].b = this->b;
-                        v[l][c][p].a = this->a;
+                        v[p][l][c].isOn = true;
+                        v[p][l][c].r = this->r;
+                        v[p][l][c].g = this->g;
+                        v[p][l][c].b = this->b;
+                        v[p][l][c].a = this->a;
                     }
                 }
             }
@@ -255,7 +255,7 @@ void Sculptor::cutEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int r
 
                 if ((l < nx && l >= 0) && (c < ny && c >= 0) && (p< nz && p >= 0))
                     if (x * x + y * y + z * z < 1)
-                        v[l][c][p].isOn = false;
+                        v[p][l][c].isOn = false;
             }
         }
     }
@@ -386,11 +386,11 @@ std::vector<std::vector<Voxel>> Sculptor::getPlane(int plane)
 
         for (int c = 0; c < ny; c++) // fill each voxel with Sculptor's object properites
         {
-            pline[c].a = v[l][c][plane].a;
-            pline[c].r = v[l][c][plane].r;
-            pline[c].g = v[l][c][plane].g;
-            pline[c].b = v[l][c][plane].b;
-            pline[c].isOn = v[l][c][plane].isOn;
+            pline[c].a = v[plane][l][c].a;
+            pline[c].r = v[plane][l][c].r;
+            pline[c].g = v[plane][l][c].g;
+            pline[c].b = v[plane][l][c].b;
+            pline[c].isOn = v[plane][l][c].isOn;
         }
 
         // Add line to the 2D vector p
