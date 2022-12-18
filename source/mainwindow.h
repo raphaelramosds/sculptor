@@ -26,15 +26,11 @@ public slots:
 
     void putVoxel();
     void cutVoxel();
-
     void putBox();
     void cutBox();
-
     void setColor();
-
     void putSphere();
     void cutSphere();
-
     void putEllipsoid();
     void cutEllipsoid();
 

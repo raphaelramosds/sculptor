@@ -401,11 +401,3 @@ std::vector<std::vector<Voxel>> Sculptor::getPlane(int plane)
 
     return p;
 }
-
-void Sculptor::realocPlane()
-{
-    delete v[0][0];
-    delete v[0];
-    delete v;
-
-}

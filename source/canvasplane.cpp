@@ -73,9 +73,9 @@ void CanvasPlane::paintEvent(QPaintEvent *event)
 
     (pixelh > pixelw) ? fat = pixelw : fat = pixelh; // square matrix = 'smaller dim'
 
-    //resize(900, 900);        // default = '700x700'
-    //setMinimumSize(900,900); // default = '700x700'
-    //setMaximumSize(900,900); // default = '1280x1280'
+    resize(900, 900);        // default = '700x700'
+    setMinimumSize(900,900); // default = '700x700'
+    setMaximumSize(900,900); // default = '1280x1280'
 
     // Canvas border and fill
 

@@ -245,18 +245,14 @@ void MainWindow::drawChosenShape()
     }
 }
 
-void MainWindow::saveOFF() {
-
+void MainWindow::saveOFF()
+{
     QMessageBox msgbox;
     QString filename = QFileDialog::getSaveFileName(this, "Salvar","/","OFF (*.off)");
 
     const char* fname = filename.toLocal8Bit().constData(); // casting go char*
 
     s->writeOFF(fname);
-
-    msgbox.setText("Escultura salva com sucesso");
-    msgbox.exec();
-
 }
 
 void MainWindow::newPlane() {
@@ -280,12 +276,11 @@ void MainWindow::newPlaneDialog()
         ui->canvasplane->changeDimZ(d->getSpinDialogZ());
         fixInputsBoundaries();
 
-        if(s != NULL)
-            s->realocPlane();
-
-        s = new Sculptor(ui->canvasplane->getDimH(),
-                         ui->canvasplane->getDimV(),
-                         ui->canvasplane->getDimZ());
+        if(s != NULL) {
+            Sculptor* temp = new Sculptor(ui->canvasplane->getDimH(),ui->canvasplane->getDimV(),ui->canvasplane->getDimZ());
+            delete s;
+            s = temp;
+        }
 
         fixInputsBoundaries();
         resetBoundaries();
@@ -383,14 +378,6 @@ void MainWindow::cutBox()
     ui->canvasplane->loadPlane(s->getPlane(ui->spinBoxSetPlane->value()));
 }
 
-void MainWindow::setColor()
-{
-    s->setColor((float) ui->spinBoxSetRed->value()/255,
-                (float) ui->spinBoxSetGreen->value()/255,
-                (float) ui->spinBoxSetBlue->value()/255,
-                1.0);
-}
-
 void MainWindow::putSphere()
 {
     s->setColor((float) ui->spinBoxSetRed->value()/255,
@@ -443,6 +430,14 @@ void MainWindow::cutEllipsoid()
                  ui->spinBoxEllipsoidDepth->value());
 
     ui->canvasplane->loadPlane(s->getPlane(ui->spinBoxSetPlane->value()));
+}
+
+void MainWindow::setColor()
+{
+    s->setColor((float) ui->spinBoxSetRed->value()/255,
+                (float) ui->spinBoxSetGreen->value()/255,
+                (float) ui->spinBoxSetBlue->value()/255,
+                1.0);
 }
 
 void MainWindow::fixInputsBoundaries()
