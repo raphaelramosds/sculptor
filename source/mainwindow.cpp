@@ -38,10 +38,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     fixInputsBoundaries();
 
-    // Standard template
-
-    resetBoundaries();
-
     // Box SIGNALS-SLOTS
 
     connect(
@@ -274,7 +270,6 @@ void MainWindow::newPlaneDialog()
         ui->canvasplane->changeDimH(d->getSpinDialogX());
         ui->canvasplane->changeDimV(d->getSpinDialogY());
         ui->canvasplane->changeDimZ(d->getSpinDialogZ());
-        fixInputsBoundaries();
 
         if(s != NULL) {
             Sculptor* temp = new Sculptor(ui->canvasplane->getDimH(),ui->canvasplane->getDimV(),ui->canvasplane->getDimZ());
@@ -283,7 +278,6 @@ void MainWindow::newPlaneDialog()
         }
 
         fixInputsBoundaries();
-        resetBoundaries();
         ui->canvasplane->loadPlane(s->getPlane(0));
     }
 
@@ -475,23 +469,11 @@ void MainWindow::fixInputsBoundaries()
     ui->horizontalSliderSetPlane->setMaximum(ui->canvasplane->getDimZ() - 1);
     ui->spinBoxSetPlane->setMaximum(ui->canvasplane->getDimZ() - 1);
 
+    ui->horizontalSliderSetPlane->setValue(ui->canvasplane->getDimZ()/2);
+    ui->spinBoxSetPlane->setValue(ui->canvasplane->getDimZ()/2);
+
 }
 
-void MainWindow::resetBoundaries() {
-
-    // Reset propieties
-    ui->horizontalSliderSphereRadius->setValue(0);
-    ui->horizontalSliderEllipsoidDepth->setValue(0);
-    ui->horizontalSliderEllipsoidHeight->setValue(0);
-    ui->horizontalSliderEllipsoidWidth->setValue(0);
-    ui->horizontalSliderBoxDepth->setValue(0);
-    ui->horizontalSliderBoxWidth->setValue(0);
-    ui->horizontalSliderBoxHeight->setValue(0);
-    ui->horizontalSliderSetPlane->setValue(0);
-    ui->horizontalSliderSetRed->setValue(0);
-    ui->horizontalSliderSetGreen->setValue(0);
-    ui->horizontalSliderSetBlue->setValue(0);
-}
 
 void MainWindow::setPlane() {
     ui->canvasplane->loadPlane(s->getPlane(ui->spinBoxSetPlane->value()));

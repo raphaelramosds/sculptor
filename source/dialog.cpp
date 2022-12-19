@@ -8,7 +8,7 @@ Dialog::Dialog(QWidget *parent) :
     ui->setupUi(this);
 
     connect(ui->pushButtonReset,
-            SIGNAL(triggered(bool)),
+            SIGNAL(clicked(bool)),
             this,
             SLOT(resetDialog()));
 }

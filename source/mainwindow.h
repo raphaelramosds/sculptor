@@ -35,7 +35,6 @@ public slots:
     void cutEllipsoid();
 
     void fixInputsBoundaries();
-    void resetBoundaries();
     void setPlane();
     void drawChosenShape();
     void saveOFF();
