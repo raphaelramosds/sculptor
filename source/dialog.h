@@ -8,6 +8,11 @@ namespace Ui {
 class Dialog;
 }
 
+
+/**
+* @brief Tiny menu where the user may want to set the dimensions X (lines), Y (cols) and Z (planes) of his sculpture
+* */
+
 class Dialog : public QDialog
 {
     Q_OBJECT
@@ -15,7 +20,6 @@ class Dialog : public QDialog
 public:
     explicit Dialog(QWidget *parent = nullptr);
     ~Dialog();
-
     int getSpinDialogX();
     int getSpinDialogY();
     int getSpinDialogZ();

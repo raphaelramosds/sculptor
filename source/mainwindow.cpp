@@ -35,6 +35,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     changeToVoxelMode();
 
+    // Asks user if he wants to draw on a canvas with new dimensions
+
     newPlaneDialog();
 
     // Box SIGNALS-SLOTS

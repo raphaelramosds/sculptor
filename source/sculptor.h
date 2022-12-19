@@ -9,7 +9,7 @@
 
 /**
  * @brief The Sculptor class allows you to draw any sculpture with voxel elements
- * @details This class dinamically allocate a three dimension matrix and makes it available for you to draw any sculpture with cubes whose dimensions are 1 x 1 x 1
+ * @details This class dinamically allocates a three dimension matrix and makes it available for you to draw any sculpture with cubes whose dimensions are 1 x 1 x 1
  * */
 
 class Sculptor {
