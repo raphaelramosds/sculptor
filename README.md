@@ -16,6 +16,4 @@ Briefly, Sculptor allocates a 3D matrix of type Voxel dinamically and allows the
 
 ## Applications
 
-This class was used for builting a interpreter and an interface where the user can draw any wished sculpture with 2D matrixes which represents its interceptions planes. You can see the documentation behind these applications [right here](https://raphaelramosds.github.io/sculptor/)
-
-The repositories of these applications are [sculptor-interpreter](https://github.com/raphaelramosds/sculptor-interpreter) and [sculptor-interface](https://github.com/raphaelramosds/sculptor-interface)
+This class was used for builting a interpreter and an interface where the user can draw any wished sculpture with 2D matrixes which represents its interceptions planes. You can see the repositories and documentations behind these applications on [Sculptor's main page](https://raphaelramosds.github.io/sculptor/)
