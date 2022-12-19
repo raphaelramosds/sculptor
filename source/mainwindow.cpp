@@ -200,7 +200,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionNewPlane,
             SIGNAL(triggered(bool)),
             this,
-            SLOT(newPlane()));
+            SLOT(newPlaneDialog()));
 
     // Exit
 
