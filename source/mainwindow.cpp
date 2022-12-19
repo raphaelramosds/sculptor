@@ -12,7 +12,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->setupUi(this);
 
-
     ui->tabWidgetShapes->setTabVisible(0,false);
     ui->tabWidgetShapes->setTabVisible(1,false);
     ui->tabWidgetShapes->setTabVisible(2,false);
@@ -34,9 +33,9 @@ MainWindow::MainWindow(QWidget *parent)
     std::vector<std::vector<Voxel>> v = s->getPlane();
     ui->canvasplane->loadPlane(v);
 
-    // Fixing shapes inputs according to the 3d matrix dimensions
+    changeToVoxelMode();
 
-    fixInputsBoundaries();
+    newPlaneDialog();
 
     // Box SIGNALS-SLOTS
 
@@ -251,9 +250,7 @@ void MainWindow::saveOFF()
     s->writeOFF(fname);
 }
 
-void MainWindow::newPlane() {
-    newPlaneDialog();
-}
+// void MainWindow::newPlane() { newPlaneDialog(); }
 
 void MainWindow::exit_() {
     exit(0);
@@ -271,11 +268,9 @@ void MainWindow::newPlaneDialog()
         ui->canvasplane->changeDimV(d->getSpinDialogY());
         ui->canvasplane->changeDimZ(d->getSpinDialogZ());
 
-        if(s != NULL) {
-            Sculptor* temp = new Sculptor(ui->canvasplane->getDimH(),ui->canvasplane->getDimV(),ui->canvasplane->getDimZ());
-            delete s;
-            s = temp;
-        }
+        Sculptor* temp = new Sculptor(ui->canvasplane->getDimH(),ui->canvasplane->getDimV(),ui->canvasplane->getDimZ());
+        delete s;
+        s = temp;
 
         fixInputsBoundaries();
         ui->canvasplane->loadPlane(s->getPlane(0));

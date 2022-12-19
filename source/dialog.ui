@@ -17,7 +17,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Nova escultura</string>
+   <string>Sculptor 3D</string>
   </property>
   <property name="sizeGripEnabled">
    <bool>false</bool>

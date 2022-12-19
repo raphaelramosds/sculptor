@@ -23,8 +23,8 @@ void CanvasPlane::mousePressEvent(QMouseEvent *event)
     if (event->button() == Qt::RightButton) rPressed = true;
     if (event->button() == Qt::LeftButton) lPressed = true;
 
-    currX = event->x()/pixelw;
-    currY = event->y()/pixelh;
+    currX = event->position().x()/pixelw;
+    currY = event->position().y()/pixelh;
 
     emit trigCurrPosition(currX,currY);
 
@@ -35,8 +35,9 @@ void CanvasPlane::mouseMoveEvent(QMouseEvent *event)
 {
     if (rPressed || lPressed)
     {
-        currX = event->x()/pixelw;
-        currY = event->y()/pixelh;
+
+        currX = event->position().x()/pixelw;
+        currY = event->position().y()/pixelh;
 
         emit trigCurrPosition(currX,currY);
 
@@ -72,6 +73,7 @@ void CanvasPlane::paintEvent(QPaintEvent *event)
     // Change the size
 
     (pixelh > pixelw) ? fat = pixelw : fat = pixelh; // square matrix = 'smaller dim'
+    pixelw = pixelh = fat;
 
     resize(900, 900);        // default = '700x700'
     setMinimumSize(900,900); // default = '700x700'

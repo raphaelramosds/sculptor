@@ -38,7 +38,6 @@ public slots:
     void setPlane();
     void drawChosenShape();
     void saveOFF();
-    void newPlane();
     void exit_();
     void newPlaneDialog();
 
