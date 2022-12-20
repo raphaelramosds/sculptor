@@ -614,6 +614,12 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="toolBar">
+   <property name="maximumSize">
+    <size>
+     <width>16777215</width>
+     <height>215</height>
+    </size>
+   </property>
    <property name="palette">
     <palette>
      <active>
@@ -1029,6 +1035,9 @@
      </disabled>
     </palette>
    </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
    <property name="windowTitle">
     <string>toolBar</string>
    </property>
@@ -1037,8 +1046,8 @@
    </property>
    <property name="iconSize">
     <size>
-     <width>64</width>
-     <height>64</height>
+     <width>45</width>
+     <height>45</height>
     </size>
    </property>
    <attribute name="toolBarArea">
@@ -1057,15 +1066,33 @@
    <property name="text">
     <string>Exportar</string>
    </property>
+   <property name="toolTip">
+    <string>Exportar (ctrl + E)</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+E</string>
+   </property>
   </action>
   <action name="actionQuit">
    <property name="text">
     <string>Sair</string>
    </property>
+   <property name="toolTip">
+    <string>Sair (ctrl + Q)</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
   </action>
   <action name="actionNewPlane">
    <property name="text">
     <string>Novo</string>
+   </property>
+   <property name="toolTip">
+    <string>Novo (ctrl + N)</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
    </property>
   </action>
   <action name="actiondrawVoxel">
@@ -1076,6 +1103,9 @@
    <property name="text">
     <string>drawVoxel</string>
    </property>
+   <property name="toolTip">
+    <string>Modo voxel</string>
+   </property>
   </action>
   <action name="actiondrawBox">
    <property name="icon">
@@ -1084,6 +1114,9 @@
    </property>
    <property name="text">
     <string>drawBox</string>
+   </property>
+   <property name="toolTip">
+    <string>Modo caixa</string>
    </property>
   </action>
   <action name="actiondrawSphere">
@@ -1094,6 +1127,9 @@
    <property name="text">
     <string>drawSphere</string>
    </property>
+   <property name="toolTip">
+    <string>Modo esfera</string>
+   </property>
   </action>
   <action name="actiondrawEllipsoid">
    <property name="icon">
@@ -1102,6 +1138,9 @@
    </property>
    <property name="text">
     <string>drawEllipsoid</string>
+   </property>
+   <property name="toolTip">
+    <string>Modo elipsóide</string>
    </property>
   </action>
  </widget>

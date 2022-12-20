@@ -9,8 +9,10 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     // Load MainWindows
-
     ui->setupUi(this);
+
+    // Load style
+
     ui->toolBar->setStyleSheet("background: rgb(41, 41, 41); border-radius: 10px 10px 10px 10px;");
     this->setStyleSheet("background: rgb(29, 30, 24); color: rgb(255,255,255);border:none");
 
