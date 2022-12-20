@@ -11,6 +11,16 @@ MainWindow::MainWindow(QWidget *parent)
     // Load MainWindows
 
     ui->setupUi(this);
+    ui->toolBar->setStyleSheet("background: rgb(41, 41, 41); border-radius: 10px 10px 10px 10px;");
+    this->setStyleSheet("background: rgb(29, 30, 24); color: rgb(255,255,255);border:none");
+
+    ui->tabWidgetShapes->setStyleSheet("background:rgb(41,41,41); color:rgb(255,255,255); border:none");
+    ui->boxTab->setStyleSheet("background:rgb(41,41,41); color:rgb(255,255,255); border:none");
+
+    ui->tabWidgetShapes->setStyleSheet("QTabBar::tab:selected{ background: rgb(41,41,41); }");
+
+    ui->groupBoxSetColor->setStyleSheet("background: rgba(41,41,41); color:rgb(255,255,255); border:none");
+    ui->groupBoxSetPlane->setStyleSheet("background: rgba(41,41,41); color:rgb(255,255,255); border:none");
 
     ui->tabWidgetShapes->setTabVisible(0,false);
     ui->tabWidgetShapes->setTabVisible(1,false);
