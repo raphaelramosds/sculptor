@@ -34,11 +34,9 @@ Sculptor::Sculptor(int _nx, int _ny, int _nz)
     for (int l = 1; l < _nx * _nz; l++)
         v[0][l] = v[0][l - 1] + _ny;
 
-    // Set initial value of all elements to isOn = false
-    // one need to do that because you aren't sure if the initial
-    // value is true (it can be anything)
+    // Set initial value of all elements to isOn = false: one need to do that because you aren't sure if the initial value is true (it can be anything)
 
-    for (int l = 1; l < _nx * _nz * _ny; l++)
+    for (int l = 0; l < _nx * _nz * _ny; l++)
         v[0][0][l].isOn = false;
 }
 

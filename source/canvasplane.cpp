@@ -23,8 +23,8 @@ void CanvasPlane::mousePressEvent(QMouseEvent *event)
     if (event->button() == Qt::RightButton) rPressed = true;
     if (event->button() == Qt::LeftButton) lPressed = true;
 
-    currX = event->position().x()/pixelw;
-    currY = event->position().y()/pixelh;
+    currX = event->x()/pixelw;
+    currY = event->y()/pixelh;
 
     emit trigCurrPosition(currX,currY);
 
@@ -36,8 +36,8 @@ void CanvasPlane::mouseMoveEvent(QMouseEvent *event)
     if (rPressed || lPressed)
     {
 
-        currX = event->position().x()/pixelw;
-        currY = event->position().y()/pixelh;
+        currX = event->x()/pixelw;
+        currY = event->y()/pixelh;
 
         emit trigCurrPosition(currX,currY);
 
