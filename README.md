@@ -4,15 +4,21 @@ A graphic interface that implements Sculptor class methods. You can see a introd
 
 ## Main shortcuts
 
-Put methods such as (put voxel, put box, put ellipsoid and put sphere) can be used with **left click**
+Put methods such as put voxel, put box, put ellipsoid and put sphere can be used with **left click**
 
-Cut methods such as (cut voxel, cut box, cut ellipsoid and cut sphere) can be used with **right click**
+Cut methods such as cut voxel, cut box, cut ellipsoid and cut sphere can be used with **right click**
+
+`CTRL + N` creates a new sculpture
+
+`CTRL + E` exports a OFF of the sculpture
+
+`CTRL + Q` quit application
 
 ## Drawing modes and setting dimensions
 
 Drawing modes can be switched by clicking on the left toolbar. There are four ones: voxel, box, sphere and ellipsoid. Once a mode is chosen, you can set the dimensions of the shape on the tab that will come up in the right side of the interface.
 
-![Demo](/assets/demo.gif)
+![Demonstração](./assets/bahia.PNG)
 
 ## New sculpture
 
