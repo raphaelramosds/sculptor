@@ -4,5 +4,6 @@
         <file>recursos/elipsoide.svg</file>
         <file>recursos/esfera.svg</file>
         <file>recursos/voxel.svg</file>
+        <file>recursos/sculptor.svg</file>
     </qresource>
 </RCC>

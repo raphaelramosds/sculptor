@@ -84,7 +84,7 @@ void CanvasPlane::paintEvent(QPaintEvent *event)
     brush.setColor(white);
     brush.setStyle(Qt::SolidPattern);
 
-    pen.setColor(QColor(35, 35, 35));
+    pen.setColor(QColor(25, 25, 25));
     pen.setWidth(1); // default = '2'
 
     painter.setBrush(brush);
@@ -106,7 +106,7 @@ void CanvasPlane::paintEvent(QPaintEvent *event)
             // Else, draw a default white box
 
             else {
-                brush.setColor(QColor(29, 30, 24));
+                brush.setColor(QColor(35, 35, 35));
             }
 
             // Update brush and draw the box

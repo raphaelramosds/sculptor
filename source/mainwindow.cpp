@@ -19,10 +19,10 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tabWidgetShapes->setStyleSheet("background:rgb(41,41,41); color:rgb(255,255,255); border:none");
     ui->boxTab->setStyleSheet("background:rgb(41,41,41); color:rgb(255,255,255); border:none");
 
-    ui->tabWidgetShapes->setStyleSheet("QTabBar::tab:selected{ background: rgb(41,41,41); }");
+    ui->tabWidgetShapes->setStyleSheet("QTabBar::tab:selected{ background: rgb(41,41,41); } ");
 
-    ui->groupBoxSetColor->setStyleSheet("background: rgba(41,41,41); color:rgb(255,255,255); border:none");
-    ui->groupBoxSetPlane->setStyleSheet("background: rgba(41,41,41); color:rgb(255,255,255); border:none");
+    ui->groupBoxSetColor->setStyleSheet("background: rgb(41,41,41); color:rgb(255,255,255); border:none");
+    ui->groupBoxSetPlane->setStyleSheet("background: rgb(41,41,41); color:rgb(255,255,255); border:none");
 
     ui->tabWidgetShapes->setTabVisible(0,false);
     ui->tabWidgetShapes->setTabVisible(1,false);
@@ -222,6 +222,8 @@ MainWindow::MainWindow(QWidget *parent)
             SIGNAL(triggered(bool)),
             this,
             SLOT(exit_()));
+    //
+    setWindowIcon(QIcon(":/icones/recursos/sculptor.svg"));
 }
 
 MainWindow::~MainWindow() {
@@ -480,6 +482,13 @@ void MainWindow::fixInputsBoundaries()
 
     ui->horizontalSliderSetPlane->setValue(ui->canvasplane->getDimZ()/2);
     ui->spinBoxSetPlane->setValue(ui->canvasplane->getDimZ()/2);
+
+    ui->horizontalSliderSetBlue->setValue(255);
+    ui->horizontalSliderSetRed->setValue(255);
+    ui->horizontalSliderSetGreen->setValue(255);
+    ui->spinBoxSetBlue->setValue(255);
+    ui->spinBoxSetGreen->setValue(255);
+    ui->spinBoxSetRed->setValue(255);
 
 }
 

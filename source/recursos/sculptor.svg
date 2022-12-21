@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="32"
+   height="32"
+   viewBox="0 0 8.4666667 8.4666667"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
+   sodipodi:docname="sculptor.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="15.839192"
+     inkscape:cx="20.311454"
+     inkscape:cy="12.70701"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="px"
+     inkscape:window-width="1920"
+     inkscape:window-height="1027"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Camada 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-288.53333)">
+    <g
+       id="g4549"
+       transform="matrix(0.82795701,0,0,0.85301837,0.72852505,43.037271)">
+      <rect
+         ry="0.47143379"
+         y="289.62497"
+         x="0.3507916"
+         height="6.3643556"
+         width="7.7675214"
+         id="rect4573-7"
+         style="fill:#002255;fill-opacity:1;stroke:none;stroke-width:2.78588438;stroke-opacity:1" />
+      <g
+         id="g4623"
+         transform="matrix(1.6061068,0,0,1.4666693,-2.6864141,-135.89522)">
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:4.00409842px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.10010245"
+           x="2.6006529"
+           y="284.51169"
+           id="text3727"
+           transform="scale(0.96849392,1.032531)"><tspan
+             sodipodi:role="line"
+             id="tspan3725"
+             x="2.6006529"
+             y="284.51169"
+             style="fill:#ffffff;stroke-width:0.10010245">S</tspan></text>
+        <rect
+           style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.29717985;stroke-opacity:1"
+           id="rect4573"
+           width="0.80180854"
+           height="0.70158249"
+           x="5.0781202"
+           y="293.02435" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:0.38608423px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#002255;fill-opacity:1;stroke:#000000;stroke-width:0.0096521;stroke-opacity:1"
+           x="5.2292228"
+           y="293.54071"
+           id="text3733"><tspan
+             sodipodi:role="line"
+             id="tspan3731"
+             x="5.2292228"
+             y="293.54071"
+             style="fill:#002255;fill-opacity:1;stroke:#000000;stroke-width:0.0096521;stroke-opacity:1">3D</tspan></text>
+      </g>
+    </g>
+  </g>
+</svg>

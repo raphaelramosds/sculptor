@@ -11,6 +11,7 @@ Dialog::Dialog(QWidget *parent) :
             SIGNAL(clicked(bool)),
             this,
             SLOT(resetDialog()));
+    setWindowIcon(QIcon(":/icones/recursos/sculptor.svg"));
 }
 
 Dialog::~Dialog()
