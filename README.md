@@ -10,7 +10,7 @@ Cut methods such as cut voxel, cut box, cut ellipsoid and cut sphere can be used
 
 `CTRL + N` creates a new sculpture
 
-`CTRL + E` exports a OFF of the sculpture
+`CTRL + S` exports a OFF of the sculpture
 
 `CTRL + Q` quit application
 

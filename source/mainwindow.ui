@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Sculptor 3D</string>
   </property>
   <property name="iconSize">
    <size>
@@ -776,10 +776,10 @@
     <string>Exportar</string>
    </property>
    <property name="toolTip">
-    <string>Exportar (ctrl + E)</string>
+    <string>Exportar (ctrl + S)</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+E</string>
+    <string>Ctrl+S</string>
    </property>
   </action>
   <action name="actionQuit">
