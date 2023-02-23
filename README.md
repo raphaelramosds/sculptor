@@ -1,6 +1,6 @@
-# Sculptor Interface
+# Sculptor
 
-A graphic interface that implements Sculptor class methods. You can see a introduction to the main funtionalities below
+A graphic interface that implements [Sculptor](https://github.com/raphaelramosds/sculptor-library) class methods. You can see a introduction to the main funtionalities below
 
 ## Main shortcuts
 
