@@ -1,20 +1,25 @@
 <h1 align="center"> <b>🖌️ Sculptor</b></h1>
 
-<div align="center">
-
-| Sample - Keven | 
-| :---: |
-| <img src="https://github.com/raphaelramosds/sculptor-lib/blob/main/assets/keven.png" style="width:400px"/> |
-
-</div>
-
 ## 💻 Project
 
-A graphic interface that implements [Sculptor](https://github.com/raphaelramosds/sculptor-lib) class methods. You can see a introduction to the main funtionalities below
+A graphic interface that allows users draw into intersections planes in order to built three dimensional structures
 
-> Sculptor is a Library developed by me for drawing sculptures with volume elements (voxels). Above you've just seen a little sample of the minion Keven, drown by me with Sculptor.
+> [Sculptor](https://github.com/raphaelramosds/sculptor-lib) is a Library developed by me for drawing sculptures with volume elements (voxels)
 
-## ⌨️ Shortcuts
+## 🚀 Technologies
+
+This desktop application was built with
+
+- Qt framework
+- C++
+
+## ✨ Functionalities
+
+Drawing modes can be switched by clicking on the left toolbar. There are four ones: voxel, box, sphere and ellipsoid. Once a mode is chosen, you can set the dimensions of the shape on the tab that will come up in the right side of the interface.
+
+![Demonstração](./assets/bahia.PNG)
+
+### Shortcuts
 
 Put methods such as put voxel, put box, put ellipsoid and put sphere can be used with **left click**
 
@@ -26,17 +31,11 @@ Cut methods such as cut voxel, cut box, cut ellipsoid and cut sphere can be used
 
 `CTRL + Q` quit application
 
-## 🖌️ Drawing modes and setting dimensions
-
-Drawing modes can be switched by clicking on the left toolbar. There are four ones: voxel, box, sphere and ellipsoid. Once a mode is chosen, you can set the dimensions of the shape on the tab that will come up in the right side of the interface.
-
-![Demonstração](./assets/bahia.PNG)
-
-## 🆕 New sculpture
+### New sculpture
 
 You can reset your canvas by clicking on `Arquivo > Novo` and set the new dimensions of your canvas.
 
-## 👌 Export your art!
+### Export your art!
 
 Once you've finished your sculpture you may want to save it on a OFF file. It can be done on `Arquivo > Exportar` and select the directory you want to save it
 
