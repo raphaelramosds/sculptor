@@ -32,7 +32,7 @@ Drawing modes can be switched by clicking on the left toolbar. There are four on
 
 ![Demonstração](./assets/bahia.PNG)
 
-## New sculpture
+## 🆕 New sculpture
 
 You can reset your canvas by clicking on `Arquivo > Novo` and set the new dimensions of your canvas.
 
