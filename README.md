@@ -1,19 +1,19 @@
-<h1 align="center"> <b>🖌️ Sculptor</b></h1>
+<h1 align="center"> <b>Sculptor</b></h1>
 
-## 💻 Project
+## Project
 
 A graphic interface that allows users draw into intersections planes in order to built three dimensional structures
 
 > [Sculptor](https://github.com/raphaelramosds/sculptor-lib) is a Library developed by me for drawing sculptures with volume elements (voxels)
 
-## 🚀 Technologies
+## Technologies
 
 This desktop application was built with
 
 - Qt framework
 - C++
 
-## ✨ Functionalities
+## Functionalities
 
 Drawing modes can be switched by clicking on the left toolbar. There are four ones: voxel, box, sphere and ellipsoid. Once a mode is chosen, you can set the dimensions of the shape on the tab that will come up in the right side of the interface.
 
